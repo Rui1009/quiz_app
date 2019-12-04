@@ -7,6 +7,7 @@ import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
 import {ModalOpenActionCreator, modalType} from "../../modules/Modal";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 
 interface Props {
@@ -38,7 +39,9 @@ const QuestionStartModal = (props: Props) => (
                     <li><Typography>問題は全部で10問です。</Typography></li>
                     <li><Typography>一度回答した問題に戻ることはできません。</Typography></li>
                 </ul>
-                <Button color={"primary"} variant={"contained"}>スタート</Button>
+                <Link to="/quiz">
+                    <Button color={"primary"} variant={"contained"}>スタート</Button>
+                </Link>
             </DialogContent>
         </Dialog>
     </Grow>

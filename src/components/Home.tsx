@@ -8,6 +8,8 @@ import {QuestionLevelActionCreator} from "../modules/QuestionLevel"
 import {connect} from "react-redux";
 import QuestionStartModal from "./Modals/QuestionStartModal";
 import {ModalOpenActionCreator} from "../modules/Modal";
+import {Route} from "react-router";
+import Quiz from "./Quiz";
 
 interface Props {
     questionLevel: string,
