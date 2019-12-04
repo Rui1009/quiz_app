@@ -51,17 +51,17 @@ const useStyles = makeStyles({
     }
 });
 
-const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
+const LogIn = (props: InjectedFormProps<LoginInfoType> & {
     currentValue: LoginInfoType
 }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Typography className={classes.title} variant={"h3"}>新規登録</Typography>
-                    <form onSubmit={props.handleSubmit}>
-                        <Grid container xs={12}>
-                            <Grid xs={12}>
+                <Typography className={classes.title} variant={"h3"}>ログイン</Typography>
+                <form onSubmit={props.handleSubmit}>
+                    <Grid container xs={12}>
+                        <Grid xs={12}>
                             <Field
                                 label={"ユーザー名(必須)"}
                                 name="username"
@@ -69,8 +69,8 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                                 type={"string"}
                                 validate={requiredValidation}
                             />
-                            </Grid>
-                            <Grid xs={12}>
+                        </Grid>
+                        <Grid xs={12}>
                             <Field
                                 label={"パスワード"}
                                 name="password"
@@ -78,10 +78,10 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                                 type={"string"}
                                 validate={[passLengthValidation, requiredValidation]}
                             />
-                            </Grid>
                         </Grid>
+                    </Grid>
                     <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
-                    </form>
+                </form>
             </CardContent>
         </Card>
 
@@ -91,11 +91,11 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
 }
 
 export default reduxForm<LoginInfoType>({
-   form: "registrationForm"
+    form: "logInForm"
 })(
     connect(
         (state: CombinedState) => ({
-            currentValue: getFormValues("registrationForm")(state) as LoginInfoType
+            currentValue: getFormValues("logInForm")(state) as LoginInfoType
         })
     )
-(NewRegistration))
+    (LogIn))
