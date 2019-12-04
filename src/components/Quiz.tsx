@@ -1,6 +1,7 @@
 import React, {useEffect} from "react"
 import {CombinedState} from "../modules/RootModule";
 import {connect} from "react-redux";
+import EasyQuiz from "./Quizes/EasyQuiz";
 
 interface Props {
     questionLevel: string
@@ -9,7 +10,7 @@ interface Props {
 const Quiz = (props: Props) => {
     switch (props.questionLevel) {
         case "入門問題":
-            return (<p>入門問題</p>)
+            return (<EasyQuiz />)
             break;
         case "中級問題":
             return (<p>中級問題</p>)
