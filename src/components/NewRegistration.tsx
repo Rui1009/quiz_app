@@ -1,12 +1,16 @@
 import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
-import { TextField, InputAdornment } from "@material-ui/core"
+import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType} from "../Types/type";
 import {connect} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
-
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Grid from "@material-ui/core/Grid";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -25,32 +29,63 @@ export const renderField = (
     );
 };
 
+const useStyles = makeStyles({
+    card: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)"
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        textAlign: "center",
+    },
+    pos: {
+        marginBottom: 12,
+    },
+    content: {
+        textAlign: "center"
+    }
+});
+
 const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
     currentValue: LoginInfoType
 }) => {
+    const classes = useStyles();
     return (
-        <div>
-            <h1>新規登録</h1>
-            <div>
-                <form onSubmit={props.handleSubmit}>
-                    <Field
-                        label={"ユーザー名"}
-                        name="username"
-                        component={renderField}
-                        type={"string"}
-                        validate={requiredValidation}
-                        />
-                    <Field
-                        label={"パスワード"}
-                        name="password"
-                        component={renderField}
-                        type={"string"}
-                        validate={[passLengthValidation, requiredValidation]}
-                    />
+        <Card className={classes.card}>
+            <CardContent className={classes.content}>
+                <Typography className={classes.title} variant={"h3"}>新規登録</Typography>
+                    <form onSubmit={props.handleSubmit}>
+                        <Grid container xs={12}>
+                            <Grid xs={12}>
+                            <Field
+                                label={"ユーザー名(必須)"}
+                                name="username"
+                                component={renderField}
+                                type={"string"}
+                                validate={requiredValidation}
+                            />
+                            </Grid>
+                            <Grid xs={12}>
+                            <Field
+                                label={"パスワード"}
+                                name="password"
+                                component={renderField}
+                                type={"string"}
+                                validate={[passLengthValidation, requiredValidation]}
+                            />
+                            </Grid>
+                        </Grid>
                     <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
-                </form>
-            </div>
-        </div>
+                    </form>
+            </CardContent>
+        </Card>
+
 
 
     )
