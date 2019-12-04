@@ -9,7 +9,7 @@ import {buildStore} from "./store";
 const App: React.FC = () => {
   return (
         <Provider store={buildStore}>
-            <NewRegistration />
+            <NewRegistration onSubmit={(value) => alert(JSON.stringify(value))}/>
         </Provider>
 
   );

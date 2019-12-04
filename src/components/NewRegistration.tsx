@@ -4,6 +4,8 @@ import { TextField, InputAdornment } from "@material-ui/core"
 import {LoginInfoType} from "../Types/type";
 import {connect} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
+import Button from "@material-ui/core/Button";
+import {passLengthValidation, requiredValidation} from "../util/Validation";
 
 
 export const renderField = (
@@ -36,13 +38,16 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                         name="username"
                         component={renderField}
                         type={"string"}
+                        validate={requiredValidation}
                         />
                     <Field
                         label={"パスワード"}
                         name="password"
                         component={renderField}
                         type={"string"}
+                        validate={[passLengthValidation, requiredValidation]}
                     />
+                    <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
                 </form>
             </div>
         </div>
