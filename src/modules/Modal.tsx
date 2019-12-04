@@ -1,7 +1,7 @@
 import React from "react"
 import {reducerWithInitialState} from "typescript-fsa-reducers";
 import actionCreatorFactory from "typescript-fsa";
-import {string} from "prop-types";
+
 
 
  const actionTypes = {
