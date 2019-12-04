@@ -82,6 +82,8 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
                     </Grid>
                     <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
                 </form>
+                <Typography>登録がまだの方は</Typography>
+                <a href={"/registration"}>こちら</a>
             </CardContent>
         </Card>
 
