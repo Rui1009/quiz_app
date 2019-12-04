@@ -6,6 +6,7 @@ import NewRegistration from "./components/NewRegistration";
 import {buildStore} from "./store";
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import LogIn from "./components/LogIn";
+import Home from "./components/Home";
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
                 <Switch>
                     <Route exact path="/" component={LogIn} />
                     <Route exact path="/registration" component={NewRegistration} />
+                    <Route exact path="/home" component={Home} />
                 </Switch>
             </BrowserRouter>
         </Provider>
