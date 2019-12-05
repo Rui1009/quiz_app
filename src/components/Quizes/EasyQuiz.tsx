@@ -8,6 +8,7 @@ import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
 import {GrowOpenActionCreator, SetAnserActionCreator} from "../../modules/Answer";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 interface Props {
     answerGrow: boolean,
@@ -26,7 +27,6 @@ const EasyQuiz = (props: Props) => {
             EasyQuizData[j] = temp
         }}, [setQuizNum]
     )
-    console.log(EasyQuizData)
 
     const handleQuizNum = (value: number) => {
         setQuizNum(value + 1)
@@ -50,10 +50,17 @@ const EasyQuiz = (props: Props) => {
                             <Typography variant={"h5"} style={{color: "red"}}>❌不正解/ 正解:{EasyQuizData[quizNum].answer}</Typography>
                         }
                         <Typography>{EasyQuizData[quizNum].description}</Typography>
-                    <Button variant={"contained"} onClick={() => {
-                        props.setGrowOpen(false)
-                        handleQuizNum(quizNum)
-                    }}>次の問題へ</Button>
+                        {  quizNum !== 9 ?
+                            <Button variant={"contained"} onClick={() => {
+                                props.setGrowOpen(false)
+                                handleQuizNum(quizNum)
+                            }}>次の問題へ</Button>
+                            :
+                            <Link to="/answer_result">
+                                <Button variant={"contained"} color={"default"}>解答結果を確認する</Button>
+                            </Link>
+
+                        }
                     </div>
                 </Grow>
 
