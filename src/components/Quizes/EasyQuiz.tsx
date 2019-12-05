@@ -15,9 +15,11 @@ import {EasyQuizType} from "../../Types/type";
 interface Props {
     answerGrow: boolean,
     answer: string[],
+    result: string[]
     setGrowOpen(value: boolean): void,
     setAnswer(value: string): void,
-    setQuestion(value: EasyQuizType[]): void
+    setQuestion(value: EasyQuizType[]): void,
+    setResult(value: string): void
 }
 
 const EasyQuiz = (props: Props) => {
@@ -57,6 +59,7 @@ const EasyQuiz = (props: Props) => {
                         <Typography>{EasyQuizData[quizNum].description}</Typography>
                         {  quizNum !== 9 ?
                             <Button variant={"contained"} onClick={() => {
+                                props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")
                                 props.setGrowOpen(false)
                                 handleQuizNum(quizNum)
                             }}>次の問題へ</Button>
@@ -64,10 +67,14 @@ const EasyQuiz = (props: Props) => {
                             <Link to="/answer_result">
                                 <Button variant={"contained"} color={"default"}>解答結果を確認する</Button>
                             </Link>
-
                         }
                     </div>
                 </Grow>
+            {
+                props.result.map((elem) =>
+                    <div>{elem}</div>
+                )
+            }
 
         </div>
     )
@@ -75,13 +82,15 @@ const EasyQuiz = (props: Props) => {
 
 const mapStateToProps = (state: CombinedState) => ({
     answerGrow: state.answerGrow,
-    answer: state.answer
+    answer: state.answer,
+    result: state.result
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
     setGrowOpen: (value: boolean) => {dispatch(GrowOpenActionCreator.setGrowOpen(value))},
     setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))},
-    setQuestion: (value: EasyQuizType[]) => {dispatch(SetQuestionActionCreator.setQuestion(value))}
+    setQuestion: (value: EasyQuizType[]) => {dispatch(SetQuestionActionCreator.setQuestion(value))},
+    setResult: (value: string) => {dispatch(SetAnserActionCreator.setResult(value))}
 })
 
 export default connect(
