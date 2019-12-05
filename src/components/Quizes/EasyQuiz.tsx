@@ -9,12 +9,15 @@ import {Action} from "typescript-fsa";
 import {GrowOpenActionCreator, SetAnserActionCreator} from "../../modules/Answer";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {SetQuestionActionCreator} from "../../modules/Question";
+import {EasyQuizType} from "../../Types/type";
 
 interface Props {
     answerGrow: boolean,
     answer: string[],
     setGrowOpen(value: boolean): void,
     setAnswer(value: string): void,
+    setQuestion(value: EasyQuizType[]): void
 }
 
 const EasyQuiz = (props: Props) => {
@@ -27,6 +30,8 @@ const EasyQuiz = (props: Props) => {
             EasyQuizData[j] = temp
         }}, [setQuizNum]
     )
+
+    props.setQuestion(EasyQuizData)
 
     const handleQuizNum = (value: number) => {
         setQuizNum(value + 1)
@@ -75,7 +80,8 @@ const mapStateToProps = (state: CombinedState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
     setGrowOpen: (value: boolean) => {dispatch(GrowOpenActionCreator.setGrowOpen(value))},
-    setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))}
+    setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))},
+    setQuestion: (value: EasyQuizType[]) => {dispatch(SetQuestionActionCreator.setQuestion(value))}
 })
 
 export default connect(
