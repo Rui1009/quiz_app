@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useLayoutEffect, useState} from "react"
 import {Button, Typography} from "@material-ui/core";
 import {EasyQuizData} from "../../data/dummy_data_easy_quiz";
-import Checkbox from '@material-ui/core/Checkbox';
 import Grow from "@material-ui/core/Grow";
 import {CombinedState} from "../../modules/RootModule";
 import {Dispatch} from "redux";
@@ -21,6 +20,8 @@ interface Props {
     setQuestion(value: EasyQuizType[]): void,
     setResult(value: string): void
 }
+
+
 
 const EasyQuiz = (props: Props) => {
     const [quizNum, setQuizNum] = useState(0)
@@ -44,7 +45,7 @@ const EasyQuiz = (props: Props) => {
             <Typography>Q.{EasyQuizData[quizNum].question}</Typography>
             {
                 EasyQuizData[quizNum].option.map((elem: string) => (
-                    <Button variant={"contained"} color={"secondary"} onClick={() => {
+                    <Button variant={"contained"} color={"secondary"} disabled={props.answerGrow} onClick={() => {
                         props.setAnswer(elem)
                         props.setGrowOpen(true)
                     }}>{elem}</Button>
@@ -59,13 +60,16 @@ const EasyQuiz = (props: Props) => {
                         <Typography>{EasyQuizData[quizNum].description}</Typography>
                         {  quizNum !== 9 ?
                             <Button variant={"contained"} onClick={() => {
-                                props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")
                                 props.setGrowOpen(false)
+                                props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")
                                 handleQuizNum(quizNum)
                             }}>次の問題へ</Button>
                             :
                             <Link to="/answer_result">
-                                <Button variant={"contained"} color={"default"}>解答結果を確認する</Button>
+                                <Button variant={"contained"}
+                                        color={"default"}
+                                        onClick={() => {props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")}}>解答結果を確認する
+                                </Button>
                             </Link>
                         }
                     </div>
