@@ -1,6 +1,5 @@
 import React, {useEffect, useLayoutEffect, useState} from "react"
 import {Button, Typography} from "@material-ui/core";
-import {EasyQuizData} from "../../data/dummy_data_easy_quiz";
 import Grow from "@material-ui/core/Grow";
 import {CombinedState} from "../../modules/RootModule";
 import {Dispatch} from "redux";
@@ -14,7 +13,8 @@ import {EasyQuizType} from "../../Types/type";
 interface Props {
     answerGrow: boolean,
     answer: string[],
-    result: string[]
+    result: string[],
+    question: EasyQuizType[],
     setGrowOpen(value: boolean): void,
     setAnswer(value: string): void,
     setQuestion(value: EasyQuizType[]): void,
@@ -25,26 +25,15 @@ interface Props {
 
 const EasyQuiz = (props: Props) => {
     const [quizNum, setQuizNum] = useState(0)
-    useEffect(() => {
-    for(let i = EasyQuizData.length - 1; i >= 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1))
-        let temp = EasyQuizData[i];
-            EasyQuizData[i] = EasyQuizData[j]
-            EasyQuizData[j] = temp
-        }}, [setQuizNum]
-    )
-
-    props.setQuestion(EasyQuizData)
-
     const handleQuizNum = (value: number) => {
         setQuizNum(value + 1)
     }
     return(
         <div>
             <Typography variant={"h6"}>第{quizNum + 1}問</Typography>
-            <Typography>Q.{EasyQuizData[quizNum].question}</Typography>
+            <Typography>Q.{props.question[quizNum].question}</Typography>
             {
-                EasyQuizData[quizNum].option.map((elem: string) => (
+                props.question[quizNum].option.map((elem: string) => (
                     <Button variant={"contained"} color={"secondary"} disabled={props.answerGrow} onClick={() => {
                         props.setAnswer(elem)
                         props.setGrowOpen(true)
@@ -52,23 +41,23 @@ const EasyQuiz = (props: Props) => {
                 ))}
                 <Grow in={props.answerGrow}>
                     <div>
-                        { EasyQuizData[quizNum].answer === props.answer[quizNum] ?
-                            <Typography variant={"h5"} style={{color: "green"}}>⭕️正解: {EasyQuizData[quizNum].answer}</Typography>
+                        { props.question[quizNum].answer === props.answer[quizNum] ?
+                            <Typography variant={"h5"} style={{color: "green"}}>⭕️正解: {props.question[quizNum].answer}</Typography>
                             :
-                            <Typography variant={"h5"} style={{color: "red"}}>❌不正解/ 正解:{EasyQuizData[quizNum].answer}</Typography>
+                            <Typography variant={"h5"} style={{color: "red"}}>❌不正解/ 正解:{props.question[quizNum].answer}</Typography>
                         }
-                        <Typography>{EasyQuizData[quizNum].description}</Typography>
+                        <Typography>{props.question[quizNum].description}</Typography>
                         {  quizNum !== 9 ?
                             <Button variant={"contained"} onClick={() => {
                                 props.setGrowOpen(false)
-                                props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")
+                                props.setResult(props.question[quizNum].answer === props.answer[quizNum] ? "O" : "X")
                                 handleQuizNum(quizNum)
                             }}>次の問題へ</Button>
                             :
                             <Link to="/answer_result">
                                 <Button variant={"contained"}
                                         color={"default"}
-                                        onClick={() => {props.setResult(EasyQuizData[quizNum].answer === props.answer[quizNum] ? "O" : "X")}}>解答結果を確認する
+                                        onClick={() => {props.setResult(props.question[quizNum].answer === props.answer[quizNum] ? "O" : "X")}}>解答結果を確認する
                                 </Button>
                             </Link>
                         }
@@ -87,7 +76,8 @@ const EasyQuiz = (props: Props) => {
 const mapStateToProps = (state: CombinedState) => ({
     answerGrow: state.answerGrow,
     answer: state.answer,
-    result: state.result
+    result: state.result,
+    question: state.question
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
