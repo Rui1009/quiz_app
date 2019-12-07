@@ -10,15 +10,19 @@ import QuestionStartModal from "./Modals/QuestionStartModal";
 import {ModalOpenActionCreator} from "../modules/Modal";
 import {Route} from "react-router";
 import Quiz from "./Quiz";
+import {SetQuestionActionCreator} from "../modules/Question";
 
 interface Props {
     questionLevel: string,
     setModalOpen(value: string): void
-    setQuestionLevel(value: string): void
+    setQuestionLevel(value: string): void,
+    loadQuestion(): void
 }
 
 
-const Home = (props: Props) => (
+const Home = (props: Props) => {
+    props.loadQuestion()
+    return (
     <Grid container xs={12} justify={"space-around"}>
         <Grid item xs={3}>
             <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
@@ -44,7 +48,7 @@ const Home = (props: Props) => (
         </Grid>
         <QuestionStartModal />
     </Grid>
-)
+)}
 
 const mapStateToProps = (state: CombinedState) => ({
     questionLevel: state.questionLevel
@@ -53,7 +57,9 @@ const mapStateToProps = (state: CombinedState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
     setQuestionLevel: (value: string) => {dispatch(QuestionLevelActionCreator.setQuestionLevel(value))},
 
-    setModalOpen: (value: string) => {dispatch(ModalOpenActionCreator.setModalOpen(value))}
+    setModalOpen: (value: string) => {dispatch(ModalOpenActionCreator.setModalOpen(value))},
+
+    loadQuestion: () => {dispatch(SetQuestionActionCreator.loadQuestion())}
 })
 
 
