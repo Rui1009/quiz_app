@@ -7,7 +7,8 @@ import {Api} from "../Api/Api";
 
 
 const actionTypes = {
-    LOAD_QUESTION: "LOAD_QUESTION",
+    LOAD_EASY_QUESTION: "LOAD_EASY_QUESTION",
+    LOAD_INTERMEDIATE_QUESTION: "LOAD_INTERMEDIATE_QUESTION",
     SET_QUESTION: "SET_QUESTION"
 }
 
@@ -15,7 +16,8 @@ const actionCreator = actionCreatorFactory();
 
 export const SetQuestionActionCreator = {
     setQuestion: actionCreator<EasyQuizType[]>(actionTypes.SET_QUESTION),
-    loadQuestion: actionCreator<void>(actionTypes.LOAD_QUESTION)
+    loadEasyQuestion: actionCreator<void>(actionTypes.LOAD_EASY_QUESTION),
+    loadIntermediateQuestion: actionCreator<void>(actionTypes.LOAD_INTERMEDIATE_QUESTION)
 }
 
 const initialState: EasyQuizType[] = []
@@ -25,7 +27,7 @@ export const questionReducer = reducerWithInitialState(initialState)
         payload
     )
 
-function* fetchQuestions() {
+function* fetchEasyQuestions() {
     try {
         const result = (yield call(Api.get, "http://localhost:3000/easy_quiz_data"))["data"];
         for(let i = result.length - 1; i >=0; i--) {
@@ -34,20 +36,30 @@ function* fetchQuestions() {
             result[i] = result[j]
             result[j] = temp
         }
-        const interMediateResult = (yield call(Api.get, "http://localhost:3000/intermediate_quiz_data"))["data"];
-        for(let i = interMediateResult.length - 1; i >=0; i--) {
-            let j = Math.floor(Math.random() * (i + 1))
-            let temp = interMediateResult[i]
-            interMediateResult[i] = interMediateResult[j]
-            interMediateResult[j] = temp
-        }
-        console.log(result)
-        console.log(interMediateResult)
         yield put(SetQuestionActionCreator.setQuestion(result))
     } catch(e) {
-        console.log("fetchQuestion error");
+        console.log("fetchEasyQuestion error");
         console.log(e)
     }
 }
 
-export const questoinSaga = [takeLatest(actionTypes.LOAD_QUESTION, fetchQuestions)];
+function* fetchInterMediateQuestion() {
+    try {
+        const result = (yield call(Api.get, "http://localhost:3000/intermediate_quiz_data"))["data"];
+        for(let i = result.length - 1; i >=0; i--) {
+            let j = Math.floor(Math.random() * (i + 1))
+            let temp = result[i]
+            result[i] = result[j]
+            result[j] = temp
+        }
+        yield put(SetQuestionActionCreator.setQuestion(result))
+    } catch(e) {
+        console.log("fetchInterMediateQuestion error");
+        console.log(e)
+    }
+}
+
+export const questoinSaga = [
+    takeLatest(actionTypes.LOAD_EASY_QUESTION, fetchEasyQuestions),
+    takeLatest(actionTypes.LOAD_INTERMEDIATE_QUESTION, fetchInterMediateQuestion)
+];

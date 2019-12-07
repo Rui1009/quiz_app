@@ -16,17 +16,18 @@ interface Props {
     questionLevel: string,
     setModalOpen(value: string): void
     setQuestionLevel(value: string): void,
-    loadQuestion(): void
+    loadEasyQuestion(): void,
+    loadIntermediateQuestion(): void
 }
 
 
 const Home = (props: Props) => {
-    props.loadQuestion()
     return (
     <Grid container xs={12} justify={"space-around"}>
         <Grid item xs={3}>
             <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
                 props.setQuestionLevel("入門問題")
+                props.loadEasyQuestion()
                 props.setModalOpen("questionStartModal")
             }}>
                 <Typography variant={"h6"}>入門問題</Typography>
@@ -37,6 +38,7 @@ const Home = (props: Props) => {
         <Grid item xs={3} style={{backgroundColor: "#C5C5C5"}}>
             <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
                 props.setQuestionLevel("中級問題")
+                props.loadIntermediateQuestion()
                 props.setModalOpen("questionStartModal")
             }}>
                 <Typography variant={"h6"}>中級問題</Typography>
@@ -44,7 +46,7 @@ const Home = (props: Props) => {
             </Box>
         </Grid>
         <Grid item xs={3}>
-            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => props.setQuestionLevel("上級問題")}>
+            <Box style={{backgroundColor: "#C5C5C5"}} aria-disabled={"true"} onClick={() => props.setQuestionLevel("上級問題")}>
                 <Typography variant={"h6"} style={{backgroundColor: "#C5C5C5"}}>上級問題</Typography>
                 <Typography>複雑な事例問題や、計算問題。</Typography>
             </Box>
@@ -62,7 +64,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
 
     setModalOpen: (value: string) => {dispatch(ModalOpenActionCreator.setModalOpen(value))},
 
-    loadQuestion: () => {dispatch(SetQuestionActionCreator.loadQuestion())}
+    loadEasyQuestion: () => {dispatch(SetQuestionActionCreator.loadEasyQuestion())},
+
+    loadIntermediateQuestion: () => {dispatch(SetQuestionActionCreator.loadIntermediateQuestion())}
 })
 
 

@@ -18,7 +18,7 @@ interface Props {
     setGrowOpen(value: boolean): void,
     setAnswer(value: string): void,
     setQuestion(value: EasyQuizType[]): void,
-    setResult(value: string): void
+    setResult(value: string): void,
 }
 
 
@@ -84,7 +84,8 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
     setGrowOpen: (value: boolean) => {dispatch(GrowOpenActionCreator.setGrowOpen(value))},
     setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))},
     setQuestion: (value: EasyQuizType[]) => {dispatch(SetQuestionActionCreator.setQuestion(value))},
-    setResult: (value: string) => {dispatch(SetAnserActionCreator.setResult(value))}
+    setResult: (value: string) => {dispatch(SetAnserActionCreator.setResult(value))},
+
 })
 
 export default connect(

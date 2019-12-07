@@ -3,7 +3,7 @@ import {reducerWithInitialState} from "typescript-fsa-reducers";
 import actionCreatorFactory from "typescript-fsa";
 import {string} from "prop-types";
 
-const actionTypes = {
+export const actionTypes = {
     SET_GROW_OPEN: "SET_GROW_OPEN",
     SET_ANSWER: "SET_ANSWER",
     SET_RESULT: "SET_RESULT"
