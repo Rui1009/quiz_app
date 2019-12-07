@@ -34,7 +34,15 @@ function* fetchQuestions() {
             result[i] = result[j]
             result[j] = temp
         }
+        const interMediateResult = (yield call(Api.get, "http://localhost:3000/intermediate_quiz_data"))["data"];
+        for(let i = interMediateResult.length - 1; i >=0; i--) {
+            let j = Math.floor(Math.random() * (i + 1))
+            let temp = interMediateResult[i]
+            interMediateResult[i] = interMediateResult[j]
+            interMediateResult[j] = temp
+        }
         console.log(result)
+        console.log(interMediateResult)
         yield put(SetQuestionActionCreator.setQuestion(result))
     } catch(e) {
         console.log("fetchQuestion error");

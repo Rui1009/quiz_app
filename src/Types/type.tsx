@@ -10,3 +10,9 @@ export interface EasyQuizType {
    answer: string,
    description: string
 }
+
+export interface IntermediateQuizType {
+    question: string,
+    answer: string,
+    description: string
+}

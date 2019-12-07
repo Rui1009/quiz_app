@@ -35,7 +35,10 @@ const Home = (props: Props) => {
         </Grid>
 
         <Grid item xs={3} style={{backgroundColor: "#C5C5C5"}}>
-            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => props.setQuestionLevel("中級問題")}>
+            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
+                props.setQuestionLevel("中級問題")
+                props.setModalOpen("questionStartModal")
+            }}>
                 <Typography variant={"h6"}>中級問題</Typography>
                 <Typography>用語の記述式問題。</Typography>
             </Box>
