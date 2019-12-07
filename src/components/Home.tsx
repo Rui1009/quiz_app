@@ -46,7 +46,7 @@ const Home = (props: Props) => {
             </Box>
         </Grid>
         <Grid item xs={3}>
-            <Box style={{backgroundColor: "#C5C5C5"}} aria-disabled={"true"} onClick={() => props.setQuestionLevel("上級問題")}>
+            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => props.setQuestionLevel("上級問題")}>
                 <Typography variant={"h6"} style={{backgroundColor: "#C5C5C5"}}>上級問題</Typography>
                 <Typography>複雑な事例問題や、計算問題。</Typography>
             </Box>
