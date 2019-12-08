@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import {Link} from "react-router-dom";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -80,7 +81,9 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                             />
                             </Grid>
                         </Grid>
-                    <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
+                        <Link to={"home"}>
+                            <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
+                        </Link>
                     </form>
             </CardContent>
         </Card>

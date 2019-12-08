@@ -9,12 +9,14 @@ import Home from "./components/Home";
 import Quiz from "./components/Quiz";
 import AnswerResult from "./components/AnswerResult";
 import Auth from "./components/Auth/Auth";
+import Header from "./components/Header";
 
 
 const App: React.FC = () => {
   return (
         <Provider store={buildStore}>
             <BrowserRouter>
+                <Header />
                 <Switch>
                     <Route exact path="/" component={LogIn} />
                     <Route exact path="/registration" component={NewRegistration} />
