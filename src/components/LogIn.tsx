@@ -10,6 +10,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import {Link} from "react-router-dom";
+import {Dispatch} from "redux";
+import {Action} from "typescript-fsa";
+import {LoginActionCreator, loginType} from "../modules/LogIn";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -52,13 +56,16 @@ const useStyles = makeStyles({
 });
 
 const LogIn = (props: InjectedFormProps<LoginInfoType> & {
-    currentValue: LoginInfoType
+    currentValue: LoginInfoType,
+    login: loginType
+    setLogin(value: LoginInfoType): void
 }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
                 <Typography className={classes.title} variant={"h3"}>ログイン</Typography>
+                <Typography style={{color: "red"}}>{props.login.errorMessage}</Typography>
                 <form onSubmit={props.handleSubmit}>
                     <Grid container xs={12}>
                         <Grid xs={12}>
@@ -80,13 +87,15 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
                             />
                         </Grid>
                     </Grid>
+                    <Link to={"/home"}>
                     <Button
                         disabled={props.invalid || props.pristine}
                         color={"primary"}
                         type={"submit"}
                         variant={"contained"}
-                        href="/home"
-                    >登録</Button>
+                        onClick={() => props.setLogin(props.currentValue)}
+                    >ログイン</Button>
+                    </Link>
                 </form>
                 <Typography>登録がまだの方は</Typography>
                 <a href="/registration">こちら</a>
@@ -103,7 +112,10 @@ export default reduxForm<LoginInfoType>({
 })(
     connect(
         (state: CombinedState) => ({
-            currentValue: getFormValues("logInForm")(state) as LoginInfoType
+            currentValue: getFormValues("logInForm")(state) as LoginInfoType,
+            login: state.login
+        }), (dispatch: Dispatch<Action<any>>) => ({
+            setLogin: (value: LoginInfoType) => {dispatch(LoginActionCreator.setLogin(value))}
         })
     )
     (LogIn))

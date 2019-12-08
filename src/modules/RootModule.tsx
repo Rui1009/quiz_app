@@ -5,6 +5,7 @@ import {modalReducer, modalType} from "./Modal";
 import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
 import {questionReducer} from "./Question";
 import {EasyQuizType} from "../Types/type";
+import {loginReducer, loginType} from "./LogIn";
 
 
 export interface CombinedState {
@@ -14,7 +15,8 @@ export interface CombinedState {
     answerGrow: boolean,
     answer: string[],
     question: EasyQuizType[],
-    result: string[]
+    result: string[],
+    login: loginType
 }
 
 
@@ -34,5 +36,6 @@ export const rootReducer = combineReducers<CombinedState>({
     answerGrow: answerGrowReducer,
     answer: answerReducer,
     question: questionReducer,
-    result: resultReducer
+    result: resultReducer,
+    login: loginReducer
 })
