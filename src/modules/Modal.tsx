@@ -47,7 +47,7 @@ const modalSlice = createSlice({
         close(state: modalType, action: {payload: string}) {
             return ({
                 ...state,
-                [action.payload]: true
+                [action.payload]: false
             })
         }
     }

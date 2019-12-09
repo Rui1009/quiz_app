@@ -11,29 +11,27 @@ import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 
-interface Props {
-    questionLevel: string
-}
 
-const QuestionStartModal = (props: Props) => {
+
+const QuestionStartModal = () => {
     const dispatch = useDispatch()
-    const close = dispatch(modalReducer.actions.close)
     const modalOpen = useSelector((state: CombinedState) => state.modalOpen)
+    const questionLevel = useSelector((state: CombinedState) => state.questionLevel)
     return (
     <Grow in={modalOpen.questionStartModal}>
         <Dialog
             scroll={"paper"}
             PaperProps={{style: {height: "auto", maxWidth: "none", width: "50%"}}}
             open
-            onClose={() => close("questionStartModal")}
+            onClose={() => dispatch(modalReducer.actions.close("questionStartModal"))}
         >
             <DialogTitle>
                 <Grid container xs={12}>
                     <Grid item xs={10}>
-                        <Typography variant={"h4"}>{props.questionLevel}</Typography>
+                        <Typography variant={"h4"}>{questionLevel}</Typography>
                     </Grid>
                     <Grid item container xs={2} justify="flex-end">
-                        <Close onClick={() => close("questionStartModal")}/>
+                        <Close onClick={() => dispatch(modalReducer.actions.close("questionStartModal"))}/>
                     </Grid>
                 </Grid>
             </DialogTitle>
@@ -51,13 +49,4 @@ const QuestionStartModal = (props: Props) => {
 )}
 
 
-const mapStateToProps = (state: CombinedState) => ({
-    modalOpen: state.modalOpen,
-    questionLevel: state.questionLevel
-})
-
-
-export default connect(
-    mapStateToProps,
-    null
-)(QuestionStartModal)
+export default QuestionStartModal

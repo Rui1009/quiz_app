@@ -1,5 +1,5 @@
 import { reducer as formReducer } from "redux-form";
-import {questionLevelReducer} from "./QuestionLevel";
+import QuestionLevelReducer from "./QuestionLevel";
 import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
 import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
@@ -34,7 +34,7 @@ export const rootReducer = combineReducers<CombinedState>({
             }
         }
     }),
-    questionLevel: questionLevelReducer,
+    questionLevel: QuestionLevelReducer.reducer,
     modalOpen: modalReducer.reducer,
     answerGrow: answerGrowReducer,
     answer: answerReducer,
