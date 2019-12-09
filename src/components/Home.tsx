@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import {CombinedState} from "../modules/RootModule";
 import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import QuestionStartModal from "./Modals/QuestionStartModal";
 import modalReducer from "../modules/Modal"
 import {SetQuestionActionCreator} from "../modules/Question";
@@ -16,9 +16,6 @@ import {useDispatch} from "react-redux";
 import questionLevelReducer from "../modules/QuestionLevel"
 
 interface Props {
-    questionLevel: string,
-    user: string,
-    userDetailInfo: PersonalInfoType[],
     loadEasyQuestion(): void,
     loadIntermediateQuestion(): void,
     loadUser(): void
@@ -40,9 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Home = (props: Props) => {
     const dispatch = useDispatch()
-    const index: number = props.userDetailInfo.findIndex(({username}) => username === props.user)
-    const playingUser: PersonalInfoType = props.userDetailInfo[index]
-    console.log(playingUser)
+    const user: string = useSelector((state: CombinedState) => state.user)
+    const userDetailInfo: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
+    const index: number = userDetailInfo.findIndex(({username}) => username === user)
+    const playingUser: PersonalInfoType = userDetailInfo[index]
+    console.log(userDetailInfo)
     const classes = useStyles()
     return (
     <Grid container xs={12} justify={"space-around"}>
@@ -108,12 +107,6 @@ const Home = (props: Props) => {
 
 )}
 
-const mapStateToProps = (state: CombinedState) => ({
-    questionLevel: state.questionLevel,
-    user: state.user,
-    userDetailInfo: state.userDetailInfo
-})
-
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
 
     loadEasyQuestion: () => {dispatch(SetQuestionActionCreator.loadEasyQuestion())},
@@ -125,6 +118,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
 
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
 )(Home)
