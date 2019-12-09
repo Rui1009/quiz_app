@@ -4,8 +4,9 @@ import { combineReducers } from "redux"
 import {modalReducer, modalType} from "./Modal";
 import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
 import {questionReducer} from "./Question";
-import {EasyQuizType} from "../Types/type";
+import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import {loginReducer, loginType} from "./LogIn";
+import {userDetailReducer, userReducer} from "./User";
 
 
 export interface CombinedState {
@@ -16,7 +17,9 @@ export interface CombinedState {
     answer: string[],
     question: EasyQuizType[],
     result: string[],
-    login: loginType
+    login: loginType,
+    user: string,
+    userDetailInfo: PersonalInfoType[]
 }
 
 
@@ -37,5 +40,7 @@ export const rootReducer = combineReducers<CombinedState>({
     answer: answerReducer,
     question: questionReducer,
     result: resultReducer,
-    login: loginReducer
+    login: loginReducer,
+    user: userReducer,
+    userDetailInfo: userDetailReducer
 })

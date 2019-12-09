@@ -17,7 +17,6 @@ interface Props {
     question: EasyQuizType[],
     setGrowOpen(value: boolean): void,
     setAnswer(value: string): void,
-    setQuestion(value: EasyQuizType[]): void,
     setResult(value: string): void,
 }
 
@@ -83,7 +82,6 @@ const mapStateToProps = (state: CombinedState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
     setGrowOpen: (value: boolean) => {dispatch(GrowOpenActionCreator.setGrowOpen(value))},
     setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))},
-    setQuestion: (value: EasyQuizType[]) => {dispatch(SetQuestionActionCreator.setQuestion(value))},
     setResult: (value: string) => {dispatch(SetAnserActionCreator.setResult(value))},
 
 })

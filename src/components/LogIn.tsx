@@ -1,5 +1,5 @@
 import React from 'react';
-import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
+import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues, autofill} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType} from "../Types/type";
 import {connect} from "react-redux";
@@ -14,6 +14,8 @@ import {Link} from "react-router-dom";
 import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
 import {LoginActionCreator, loginType} from "../modules/LogIn";
+import logo from "../genkan_logo.svg"
+import {SetUserActionCreator} from "../modules/User";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -37,7 +39,8 @@ const useStyles = makeStyles({
         position: "absolute",
         top: "50%",
         left: "50%",
-        transform: "translate(-50%, -50%)"
+        transform: "translate(-50%, -50%)",
+        border: "groove",
     },
     bullet: {
         display: 'inline-block',
@@ -46,29 +49,34 @@ const useStyles = makeStyles({
     },
     title: {
         textAlign: "center",
+        marginBottom: 12
     },
     pos: {
         marginBottom: 12,
     },
     content: {
-        textAlign: "center"
+        textAlign: "center",
+    },
+    form: {
+        marginBottom: 12
     }
 });
 
 const LogIn = (props: InjectedFormProps<LoginInfoType> & {
     currentValue: LoginInfoType,
     login: loginType
-    setLogin(value: LoginInfoType): void
+    setLogin(value: LoginInfoType): void,
+    setUser(value: string): void
 }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Typography className={classes.title} variant={"h3"}>ログイン</Typography>
+                <Typography className={classes.title} variant={"h4"}>ログイン</Typography>
                 <Typography style={{color: "red"}}>{props.login.errorMessage}</Typography>
                 <form onSubmit={props.handleSubmit}>
                     <Grid container xs={12}>
-                        <Grid xs={12}>
+                        <Grid xs={12} className={classes.form}>
                             <Field
                                 label={"ユーザー名(必須)"}
                                 name="username"
@@ -77,7 +85,7 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
                                 validate={requiredValidation}
                             />
                         </Grid>
-                        <Grid xs={12}>
+                        <Grid xs={12} className={classes.form}>
                             <Field
                                 label={"パスワード"}
                                 name="password"
@@ -93,7 +101,10 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
                         color={"primary"}
                         type={"submit"}
                         variant={"contained"}
-                        onClick={() => props.setLogin(props.currentValue)}
+                        onClick={() => {
+                            props.setLogin(props.currentValue)
+                            props.setUser(props.currentValue.username)
+                        }}
                     >ログイン</Button>
                     </Link>
                 </form>
@@ -115,7 +126,8 @@ export default reduxForm<LoginInfoType>({
             currentValue: getFormValues("logInForm")(state) as LoginInfoType,
             login: state.login
         }), (dispatch: Dispatch<Action<any>>) => ({
-            setLogin: (value: LoginInfoType) => {dispatch(LoginActionCreator.setLogin(value))}
+            setLogin: (value: LoginInfoType) => {dispatch(LoginActionCreator.setLogin(value))},
+            setUser: (value: string) => {dispatch(SetUserActionCreator.setUser(value))}
         })
     )
     (LogIn))

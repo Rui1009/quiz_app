@@ -34,7 +34,8 @@ const useStyles = makeStyles({
         position: "absolute",
         top: "50%",
         left: "50%",
-        transform: "translate(-50%, -50%)"
+        transform: "translate(-50%, -50%)",
+        border: "groove"
     },
     bullet: {
         display: 'inline-block',
@@ -49,6 +50,9 @@ const useStyles = makeStyles({
     },
     content: {
         textAlign: "center"
+    },
+    form: {
+        marginBottom: 12
     }
 });
 
@@ -59,10 +63,10 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Typography className={classes.title} variant={"h3"}>新規登録</Typography>
+                <Typography className={classes.title} variant={"h4"}>新規登録</Typography>
                     <form onSubmit={props.handleSubmit}>
                         <Grid container xs={12}>
-                            <Grid xs={12}>
+                            <Grid xs={12} className={classes.form}>
                             <Field
                                 label={"ユーザー名(必須)"}
                                 name="username"
@@ -71,7 +75,7 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                                 validate={requiredValidation}
                             />
                             </Grid>
-                            <Grid xs={12}>
+                            <Grid xs={12} className={classes.form}>
                             <Field
                                 label={"パスワード"}
                                 name="password"
@@ -81,8 +85,8 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                             />
                             </Grid>
                         </Grid>
-                        <Link to={"home"}>
-                            <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>登録</Button>
+                        <Link to={"/home"}>
+                            <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>新規登録</Button>
                         </Link>
                     </form>
             </CardContent>
