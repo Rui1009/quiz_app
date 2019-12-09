@@ -29,13 +29,15 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        avator: {
+        avatar: {
             display: "flex",
             margin: theme.spacing(1),
-            width: 60,
-            height: 60
-        }
-    })
+            height: "auto",
+            width: "auto"
+        },
+        wrap: {
+
+    }})
 )
 
 
@@ -45,9 +47,34 @@ const Home = (props: Props) => {
     console.log(playingUser)
     const classes = useStyles()
     return (
-        <div>
-        <Avatar variant={"square"} src={playingUser.icon} className={classes.avator} />
     <Grid container xs={12} justify={"space-around"}>
+        <Grid item xs={3}>
+            <Avatar variant={"square"} src={playingUser.icon} className={classes.avatar} />
+        </Grid>
+        <Grid item xs={6}>
+            <ul className={classes.wrap}>
+                <Typography>名前:</Typography>
+                <Typography variant={"h5"}>{playingUser.username}</Typography>
+                <Typography>レベル:</Typography>
+                <Typography variant={"h5"}>{playingUser.class}</Typography>
+            </ul>
+        </Grid>
+        <Grid item xs={6}>
+            <ul>
+                <Typography>順位:</Typography>
+                <Typography variant={"h5"}>{playingUser.lank}位</Typography>
+                <Typography>得意分野:</Typography>
+                <Typography variant={"h5"}>{playingUser.strongField}</Typography>
+            </ul>
+        </Grid>
+        <Grid item xs={6}>
+            <ul>
+                <Typography>クリアした問題:</Typography>
+                <Typography variant={"h5"}>{playingUser.achievementRate}％</Typography>
+                <Typography>苦手分野:</Typography>
+                <Typography variant={"h5"}>{playingUser.weakField}</Typography>
+            </ul>
+        </Grid>
         <Grid item xs={3}>
             <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
                 props.setQuestionLevel("入門問題")
@@ -77,7 +104,8 @@ const Home = (props: Props) => {
         </Grid>
         <QuestionStartModal />
     </Grid>
-        </div>
+
+
 )}
 
 const mapStateToProps = (state: CombinedState) => ({
