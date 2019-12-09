@@ -1,5 +1,5 @@
-import React from "react"
-import {Box, Grid} from "@material-ui/core";
+import React, {useEffect} from "react"
+import {Box, createStyles, Grid, Theme} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {CombinedState} from "../modules/RootModule";
 import {Dispatch} from "redux";
@@ -11,18 +11,42 @@ import {ModalOpenActionCreator} from "../modules/Modal";
 import {Route} from "react-router";
 import Quiz from "./Quiz";
 import {SetQuestionActionCreator} from "../modules/Question";
+import {SetUserActionCreator} from "../modules/User";
+import {PersonalInfoType} from "../Types/type";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Avatar from "@material-ui/core/Avatar";
 
 interface Props {
     questionLevel: string,
-    setModalOpen(value: string): void
+    user: string,
+    userDetailInfo: PersonalInfoType[],
+    setModalOpen(value: string): void,
     setQuestionLevel(value: string): void,
     loadEasyQuestion(): void,
-    loadIntermediateQuestion(): void
+    loadIntermediateQuestion(): void,
+    loadUser(): void
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        avator: {
+            display: "flex",
+            margin: theme.spacing(1),
+            width: 60,
+            height: 60
+        }
+    })
+)
 
 
 const Home = (props: Props) => {
+    const index: number = props.userDetailInfo.findIndex(({username}) => username === props.user)
+    const playingUser: PersonalInfoType = props.userDetailInfo[index]
+    console.log(playingUser)
+    const classes = useStyles()
     return (
+        <div>
+        <Avatar variant={"square"} src={playingUser.icon} className={classes.avator} />
     <Grid container xs={12} justify={"space-around"}>
         <Grid item xs={3}>
             <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
@@ -53,10 +77,13 @@ const Home = (props: Props) => {
         </Grid>
         <QuestionStartModal />
     </Grid>
+        </div>
 )}
 
 const mapStateToProps = (state: CombinedState) => ({
-    questionLevel: state.questionLevel
+    questionLevel: state.questionLevel,
+    user: state.user,
+    userDetailInfo: state.userDetailInfo
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
@@ -66,7 +93,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
 
     loadEasyQuestion: () => {dispatch(SetQuestionActionCreator.loadEasyQuestion())},
 
-    loadIntermediateQuestion: () => {dispatch(SetQuestionActionCreator.loadIntermediateQuestion())}
+    loadIntermediateQuestion: () => {dispatch(SetQuestionActionCreator.loadIntermediateQuestion())},
+
+    loadUser: () => {dispatch(SetUserActionCreator.loadUser())}
 })
 
 

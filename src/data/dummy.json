@@ -160,7 +160,45 @@
       "answer": "なつぞら",
       "description": "主演は広瀬すず。"
     }
+  ],
+
+  "personal_info":
+  [
+    {
+      "username": "るい",
+      "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBMUxyuBlX-YuCXlPi4gaJhnX0T2BpU12rhVojbP5MBv3dF7asA&s",
+      "lank": 1,
+      "class": "神",
+      "achievementRate": 100,
+      "strongField": "英語",
+      "weakField": "ない"
+    },
+    {
+      "username": "織田信長",
+      "icon": "",
+      "lank": "武将",
+      "class": 2,
+      "achievementRate": 86,
+      "strongField": "戦",
+      "weakField": "優しさ"
+    },
+    {
+      "username": "徳川家康",
+      "icon": "",
+      "lank": "征夷大将軍",
+      "class": 3,
+      "achievementRate": 77,
+      "strongField": "天下統一",
+      "weakField": "顔面偏差値"
+    },
+    {
+      "username": "豊臣秀吉",
+      "icon": "",
+      "lank": "グローバルエリート",
+      "class": 4,
+      "achievementRate": 55,
+      "strongField": "朝鮮侵攻",
+      "weakField": "子孫残し"
+    }
   ]
-
-
 }

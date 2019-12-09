@@ -16,3 +16,13 @@ export interface IntermediateQuizType {
     answer: string,
     description: string
 }
+
+export interface PersonalInfoType {
+    username: string,
+    icon?: string,
+    lank?: number,
+    class?: string
+    achievementRate?: number,
+    strongField?: string,
+    weakField?: string
+}
