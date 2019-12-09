@@ -2,7 +2,7 @@ import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues, autofill} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType} from "../Types/type";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
@@ -15,7 +15,7 @@ import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
 import {LoginActionCreator, loginType} from "../modules/LogIn";
 import logo from "../genkan_logo.svg"
-import {SetUserActionCreator} from "../modules/User";
+import {SetUserActionCreator, userSliceReducer} from "../modules/User";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -66,9 +66,9 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
     currentValue: LoginInfoType,
     login: loginType
     setLogin(value: LoginInfoType): void,
-    setUser(value: string): void
 }) => {
     const classes = useStyles();
+    const dispatch = useDispatch()
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
@@ -103,7 +103,7 @@ const LogIn = (props: InjectedFormProps<LoginInfoType> & {
                         variant={"contained"}
                         onClick={() => {
                             props.setLogin(props.currentValue)
-                            props.setUser(props.currentValue.username)
+                            dispatch(userSliceReducer.actions.setUser(props.currentValue.username))
                         }}
                     >ログイン</Button>
                     </Link>
@@ -127,7 +127,6 @@ export default reduxForm<LoginInfoType>({
             login: state.login
         }), (dispatch: Dispatch<Action<any>>) => ({
             setLogin: (value: LoginInfoType) => {dispatch(LoginActionCreator.setLogin(value))},
-            setUser: (value: string) => {dispatch(SetUserActionCreator.setUser(value))}
         })
     )
     (LogIn))

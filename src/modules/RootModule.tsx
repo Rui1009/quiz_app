@@ -6,7 +6,7 @@ import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./An
 import {questionReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import {loginReducer, loginType} from "./LogIn";
-import {userDetailReducer, userReducer} from "./User";
+import {userDetailSliceReducer, userSliceReducer} from "./User";
 
 
 export interface CombinedState {
@@ -41,6 +41,6 @@ export const rootReducer = combineReducers<CombinedState>({
     question: questionReducer,
     result: resultReducer,
     login: loginReducer,
-    user: userReducer,
-    userDetailInfo: userDetailReducer
+    user: userSliceReducer.reducer,
+    userDetailInfo: userDetailSliceReducer.reducer
 })
