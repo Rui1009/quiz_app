@@ -1,7 +1,7 @@
 import { reducer as formReducer } from "redux-form";
 import {questionLevelReducer} from "./QuestionLevel";
 import { combineReducers } from "redux"
-import {modalReducer, modalType} from "./Modal";
+import modalReducer, {modalType} from "./Modal";
 import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
 import {questionReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
@@ -35,7 +35,7 @@ export const rootReducer = combineReducers<CombinedState>({
         }
     }),
     questionLevel: questionLevelReducer,
-    modalOpen: modalReducer,
+    modalOpen: modalReducer.reducer,
     answerGrow: answerGrowReducer,
     answer: answerReducer,
     question: questionReducer,

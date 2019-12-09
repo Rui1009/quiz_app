@@ -5,24 +5,27 @@ import { Close } from "@material-ui/icons"
 import {CombinedState} from "../../modules/RootModule";
 import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
-import {ModalOpenActionCreator, modalType} from "../../modules/Modal";
+import modalReducer, {modalType} from "../../modules/Modal";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 
 interface Props {
-    modalOpen: modalType,
-    questionLevel: string,
-    setModalOpen(value: string): void,
-    setModalClose(value: string): void
+    questionLevel: string
 }
-const QuestionStartModal = (props: Props) => (
-    <Grow in={props.modalOpen.questionStartModal}>
+
+const QuestionStartModal = (props: Props) => {
+    const dispatch = useDispatch()
+    const close = dispatch(modalReducer.actions.close)
+    const modalOpen = useSelector((state: CombinedState) => state.modalOpen)
+    return (
+    <Grow in={modalOpen.questionStartModal}>
         <Dialog
             scroll={"paper"}
             PaperProps={{style: {height: "auto", maxWidth: "none", width: "50%"}}}
             open
-            onClose={() => props.setModalClose("questionStartModal")}
+            onClose={() => close("questionStartModal")}
         >
             <DialogTitle>
                 <Grid container xs={12}>
@@ -30,7 +33,7 @@ const QuestionStartModal = (props: Props) => (
                         <Typography variant={"h4"}>{props.questionLevel}</Typography>
                     </Grid>
                     <Grid item container xs={2} justify="flex-end">
-                        <Close onClick={() => props.setModalClose("questionStartModal")}/>
+                        <Close onClick={() => close("questionStartModal")}/>
                     </Grid>
                 </Grid>
             </DialogTitle>
@@ -45,7 +48,7 @@ const QuestionStartModal = (props: Props) => (
             </DialogContent>
         </Dialog>
     </Grow>
-)
+)}
 
 
 const mapStateToProps = (state: CombinedState) => ({
@@ -53,13 +56,8 @@ const mapStateToProps = (state: CombinedState) => ({
     questionLevel: state.questionLevel
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
-    setModalOpen: (value: string) => {dispatch(ModalOpenActionCreator.setModalOpen(value))},
-
-    setModalClose: (value: string) => {dispatch(ModalOpenActionCreator.setModalClose(value))}
-})
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(QuestionStartModal)
