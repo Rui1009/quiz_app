@@ -5,7 +5,7 @@ import modalReducer, {modalType} from "./Modal";
 import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
 import {questionReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
-import {loginReducer, loginType} from "./LogIn";
+import loginReducer, {loginType} from "./LogIn";
 import {userDetailSliceReducer, userSliceReducer} from "./User";
 
 
@@ -40,7 +40,7 @@ export const rootReducer = combineReducers<CombinedState>({
     answer: answerReducer,
     question: questionReducer,
     result: resultReducer,
-    login: loginReducer,
+    login: loginReducer.reducer,
     user: userSliceReducer.reducer,
     userDetailInfo: userDetailSliceReducer.reducer
 })
