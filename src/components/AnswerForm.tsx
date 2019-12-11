@@ -3,12 +3,10 @@ import {Field, getFormValues, InjectedFormProps, WrappedFieldProps} from "redux-
 import {InputAdornment, TextField} from "@material-ui/core";
 import {reduxForm} from "redux-form";
 import {requiredValidation} from "../util/Validation";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
-import {Action} from "typescript-fsa";
-import {Dispatch} from "redux";
-import {SetAnserActionCreator} from "../modules/Answer";
+import {answerSliceReducer} from "../modules/Answer";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -27,11 +25,10 @@ export const renderField = (
     );
 };
 
-const AnswerForm = (props: InjectedFormProps & {
-    currentValue: {answer: string},
-    setAnswer(value: string): void,
-    disabled: boolean
-}) => {console.log(props.currentValue)
+const AnswerForm = (props: InjectedFormProps) => {
+    const dispatch = useDispatch()
+    const currentValue = useSelector((state: CombinedState) => getFormValues("answerForm")(state) as {answer: string})
+    const disabled = useSelector((state: CombinedState) => state.answerGrow)
     return(
         <form onSubmit={props.handleSubmit}>
             <Field
@@ -41,12 +38,12 @@ const AnswerForm = (props: InjectedFormProps & {
                 validate={requiredValidation}
             />
             <Button
-                disabled={props.invalid || props.pristine || props.disabled}
+                disabled={props.invalid || props.pristine || disabled}
                 color={"primary"}
                 type={"submit"}
                 variant={"contained"}
                 onClick={() => {
-                    props.setAnswer(props.currentValue.answer)
+                    dispatch(answerSliceReducer.actions.setAnswer(currentValue.answer))
                 }}
             >回答</Button>
         </form>
@@ -56,13 +53,4 @@ const AnswerForm = (props: InjectedFormProps & {
 export default reduxForm({
     form: "answerForm",
     enableReinitialize: true
-})(
-    connect(
-        (state: CombinedState) => ({
-            currentValue: getFormValues("answerForm")(state) as {answer: string},
-            disabled: state.answerGrow
-        }), (dispatch: Dispatch<Action<any>>) => ({
-            setAnswer: (value: string) => {dispatch(SetAnserActionCreator.setAnswer(value))}
-        })
-    )(AnswerForm)
-)
+})(AnswerForm)

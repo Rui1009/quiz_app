@@ -2,7 +2,7 @@ import { reducer as formReducer } from "redux-form";
 import QuestionLevelReducer from "./QuestionLevel";
 import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
-import {actionTypes, answerGrowReducer, answerReducer, resultReducer} from "./Answer";
+import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./Answer";
 import {questionReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
@@ -27,7 +27,7 @@ export const rootReducer = combineReducers<CombinedState>({
     form: formReducer.plugin({
         answerForm: (state, action) => {
             switch (action.type) {
-                case actionTypes.SET_RESULT:
+                case resultSliceReducer.actions.setResult.toString():
                     return undefined;
                 default:
                     return state
@@ -36,10 +36,10 @@ export const rootReducer = combineReducers<CombinedState>({
     }),
     questionLevel: QuestionLevelReducer.reducer,
     modalOpen: modalReducer.reducer,
-    answerGrow: answerGrowReducer,
-    answer: answerReducer,
+    answerGrow: answerGrowSliceReducer.reducer,
+    answer: answerSliceReducer.reducer,
     question: questionReducer,
-    result: resultReducer,
+    result: resultSliceReducer.reducer,
     login: loginReducer.reducer,
     user: userSliceReducer.reducer,
     userDetailInfo: userDetailSliceReducer.reducer
