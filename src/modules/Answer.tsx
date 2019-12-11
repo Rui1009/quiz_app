@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import {reducerWithInitialState} from "typescript-fsa-reducers";
 import actionCreatorFactory from "typescript-fsa";
 import {string} from "prop-types";
@@ -39,7 +39,7 @@ export const answerSliceReducer = createSlice({
     initialState: initialAnswerState,
     reducers: {
         setAnswer(state: string[], action: {payload: string}) {
-            state.concat(action.payload)
+            return (state.concat(action.payload))
         }
     }
 })
@@ -51,7 +51,7 @@ export const resultSliceReducer = createSlice({
     initialState: initialResultState,
     reducers: {
         setResult(state: string[], action: {payload: string}) {
-            state.concat(action.payload)
+            return (state.concat(action.payload))
         }
     }
 })

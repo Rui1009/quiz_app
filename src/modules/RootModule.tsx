@@ -3,7 +3,7 @@ import QuestionLevelReducer from "./QuestionLevel";
 import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
 import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./Answer";
-import {questionReducer} from "./Question";
+import {questionSliceReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
 import {userDetailSliceReducer, userSliceReducer} from "./User";
@@ -38,7 +38,7 @@ export const rootReducer = combineReducers<CombinedState>({
     modalOpen: modalReducer.reducer,
     answerGrow: answerGrowSliceReducer.reducer,
     answer: answerSliceReducer.reducer,
-    question: questionReducer,
+    question: questionSliceReducer.reducer,
     result: resultSliceReducer.reducer,
     login: loginReducer.reducer,
     user: userSliceReducer.reducer,
