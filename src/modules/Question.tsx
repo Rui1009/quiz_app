@@ -39,6 +39,7 @@ export const questionSliceReducer = createSlice({
     }
 })
 
+
 function* fetchEasyQuestions() {
     try {
         const result = (yield call(Api.get, "http://localhost:3000/easy_quiz_data"))["data"];
@@ -50,7 +51,7 @@ function* fetchEasyQuestions() {
         }
         yield put(questionSliceReducer.actions.setQuestion(result))
     } catch(e) {
-        console.log("fetchEasyQuestion error");
+        console.log("fetchQuestion error");
         console.log(e)
     }
 }
@@ -66,7 +67,7 @@ function* fetchInterMediateQuestion() {
         }
         yield put(questionSliceReducer.actions.setQuestion(result))
     } catch(e) {
-        console.log("fetchInterMediateQuestion error");
+        console.log("fetchQuestion error");
         console.log(e)
     }
 }

@@ -33,6 +33,7 @@ const App = (props: Props) => {
                     <Route exact path="/" component={LogIn} />
                     <Route exact path="/registration" component={NewRegistration} />
                     <Switch>
+                        //@ts-ignore
                         <Auth>
                             <Route exact path="/home" component={Home} />
                             <Route exact path="/quiz" component={Quiz} />

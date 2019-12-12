@@ -33,7 +33,9 @@ const AnswerResult = (props: Props) => {
             )
         }
             <div>
-                <Button variant={"contained"} color={"secondary"} href={"/home"}>ホームへ戻る</Button>
+                <Link to={"/home"}>
+                    <Button variant={"contained"} color={"secondary"}>ホームへ戻る</Button>
+                </Link>
             </div>
         </div>
 

@@ -41,7 +41,7 @@ const Home = (props: Props) => {
     const userDetailInfo: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
     const index: number = userDetailInfo.findIndex(({username}) => username === user)
     const playingUser: PersonalInfoType = userDetailInfo[index]
-    console.log(userDetailInfo)
+    console.log(playingUser)
     const classes = useStyles()
     return (
     <Grid container xs={12} justify={"space-around"}>

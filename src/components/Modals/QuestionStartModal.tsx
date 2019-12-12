@@ -38,10 +38,10 @@ const QuestionStartModal = () => {
             <DialogContent>
                 <ul>
                     <li><Typography>問題は全部で10問です。</Typography></li>
-                    <li><Typography>一度回答した問題に戻ることはできません。</Typography></li>
+                    <li><Typography color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
                 </ul>
                 <Link to="/quiz">
-                    <Button color={"primary"} variant={"contained"}>スタート</Button>
+                    <Button color={"primary"} variant={"contained"} onClick={() => dispatch(modalReducer.actions.close("questionStartModal"))}>スタート</Button>
                 </Link>
             </DialogContent>
         </Dialog>
