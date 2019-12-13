@@ -47,7 +47,10 @@ const EasyQuiz = () => {
                             <Link to="/answer_result">
                                 <Button variant={"contained"}
                                         color={"default"}
-                                        onClick={() => {dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))}}>解答結果を確認する
+                                        onClick={() => {
+                                            dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
+                                            dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
+                                        }}>解答結果を確認する
                                 </Button>
                             </Link>
                         }

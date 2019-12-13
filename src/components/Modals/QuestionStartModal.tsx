@@ -9,6 +9,7 @@ import modalReducer, {modalType} from "../../modules/Modal";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import {answerSliceReducer, resultSliceReducer} from "../../modules/Answer";
 
 
 
@@ -41,7 +42,11 @@ const QuestionStartModal = () => {
                     <li><Typography color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
                 </ul>
                 <Link to="/quiz">
-                    <Button color={"primary"} variant={"contained"} onClick={() => dispatch(modalReducer.actions.close("questionStartModal"))}>スタート</Button>
+                    <Button color={"primary"} variant={"contained"} onClick={() => {
+                        dispatch(modalReducer.actions.close("questionStartModal"))
+                        dispatch(answerSliceReducer.actions.resetAnswer())
+                        dispatch(resultSliceReducer.actions.resetResult())
+                    }}>スタート</Button>
                 </Link>
             </DialogContent>
         </Dialog>

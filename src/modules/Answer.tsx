@@ -40,6 +40,9 @@ export const answerSliceReducer = createSlice({
     reducers: {
         setAnswer(state: string[], action: {payload: string}) {
             return (state.concat(action.payload))
+        },
+        resetAnswer(state: string[], action) {
+            return []
         }
     }
 })
@@ -52,6 +55,9 @@ export const resultSliceReducer = createSlice({
     reducers: {
         setResult(state: string[], action: {payload: string}) {
             return (state.concat(action.payload))
+        },
+        resetResult(state: string[], action) {
+            return []
         }
     }
 })

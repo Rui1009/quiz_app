@@ -1,23 +1,19 @@
 import React from "react"
 import {CombinedState} from "../modules/RootModule";
 import _ from "lodash"
-import {connect} from "react-redux";
-import {EasyQuizType} from "../Types/type";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
 
-interface Props {
-    result: string[],
-    answer: string[],
-    question: EasyQuizType[]
-}
+const AnswerResult = () => {
+    const dispatch = useDispatch()
+    const result = useSelector((state: CombinedState) => state.result)
+    const answer = useSelector((state: CombinedState) => state.answer)
+    const question = useSelector((state: CombinedState) => state.question)
 
-
-
-const AnswerResult = (props: Props) => {
     let collectNum = 0;
     for(let i = 0; i < 10; i++) {
-        if(props.result[i] === "O") {
+        if(result[i] === "O") {
             collectNum++
         }
     }
@@ -28,7 +24,7 @@ const AnswerResult = (props: Props) => {
         {
             _.range(10).map((num) =>
                 <ul>
-                    <li>{props.result[num]}: 問題: {props.question[num].question} 正解: {props.question[num].answer} あなたの解答:{props.answer[num]}</li>
+                    <li>{result[num]}: 問題: {question[num].question} 正解: {question[num].answer} あなたの解答:{answer[num]}</li>
                 </ul>
             )
         }
@@ -42,15 +38,4 @@ const AnswerResult = (props: Props) => {
     )
 }
 
-const mapStateToProps = (state: CombinedState) => ({
-    result: state.result,
-    answer: state.answer,
-    question: state.question
-})
-
-
-
-export default connect(
-    mapStateToProps,
-    null
-)(AnswerResult)
+export default AnswerResult
