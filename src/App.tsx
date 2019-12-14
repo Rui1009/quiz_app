@@ -14,6 +14,7 @@ import {CombinedState} from "./modules/RootModule";
 import {Dispatch} from "redux";
 import {Action} from "typescript-fsa";
 import {SetUserActionCreator} from "./modules/User";
+import SettingPage from "./components/SettingPage";
 
 interface Props {
     user: string
@@ -28,14 +29,15 @@ const App = (props: Props) => {
   return (
 
             <BrowserRouter>
-                <Header />
                 <Switch>
                     <Route exact path="/" component={LogIn} />
                     <Route exact path="/registration" component={NewRegistration} />
                     <Switch>
                         //@ts-ignore
                         <Auth>
+                            <Header />
                             <Route exact path="/home" component={Home} />
+                            <Route exact path="/setting_page" component={SettingPage} />
                             <Route exact path="/quiz" component={Quiz} />
                             <Route exact path="/answer_result" component={AnswerResult} />
                         </Auth>

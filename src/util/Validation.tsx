@@ -5,3 +5,4 @@ export const passLengthValidation = (value: string) => (
 export const requiredValidation = (value: string) => (
     value ? undefined : "必須項目です"
 )
+

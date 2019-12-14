@@ -6,7 +6,7 @@ import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./
 import {questionSliceReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
-import {userDetailSliceReducer, userSliceReducer} from "./User";
+import {playingUserSliceReducer, userDetailSliceReducer, userSliceReducer} from "./User";
 
 
 export interface CombinedState {
@@ -19,7 +19,8 @@ export interface CombinedState {
     result: string[],
     login: loginType,
     user: string,
-    userDetailInfo: PersonalInfoType[]
+    userDetailInfo: PersonalInfoType[],
+    playingUser: PersonalInfoType
 }
 
 
@@ -42,5 +43,6 @@ export const rootReducer = combineReducers<CombinedState>({
     result: resultSliceReducer.reducer,
     login: loginReducer.reducer,
     user: userSliceReducer.reducer,
-    userDetailInfo: userDetailSliceReducer.reducer
+    userDetailInfo: userDetailSliceReducer.reducer,
+    playingUser: playingUserSliceReducer.reducer
 })

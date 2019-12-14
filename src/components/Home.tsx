@@ -8,12 +8,13 @@ import {connect, useSelector} from "react-redux";
 import QuestionStartModal from "./Modals/QuestionStartModal";
 import modalReducer from "../modules/Modal"
 import {SetQuestionActionCreator} from "../modules/Question";
-import {SetUserActionCreator} from "../modules/User";
+import {playingUserSliceReducer, SetUserActionCreator} from "../modules/User";
 import {PersonalInfoType} from "../Types/type";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Avatar from "@material-ui/core/Avatar";
 import {useDispatch} from "react-redux";
 import questionLevelReducer from "../modules/QuestionLevel"
+import Header from "./Header";
 
 interface Props {
     loadEasyQuestion(): void,
@@ -41,7 +42,7 @@ const Home = (props: Props) => {
     const userDetailInfo: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
     const index: number = userDetailInfo.findIndex(({username}) => username === user)
     const playingUser: PersonalInfoType = userDetailInfo[index]
-    console.log(playingUser)
+    dispatch(playingUserSliceReducer.actions.setPlayingUser(playingUser))
     const classes = useStyles()
     return (
     <Grid container xs={12} justify={"space-around"}>

@@ -38,6 +38,21 @@ export const userDetailSliceReducer = createSlice({
     }
 })
 
+const initialPlayingUserState: PersonalInfoType = {
+    username: "",
+    password: ""
+}
+
+export const playingUserSliceReducer = createSlice({
+    name: "playinguser",
+    initialState: initialPlayingUserState,
+    reducers: {
+        setPlayingUser(state: PersonalInfoType, action: {payload: PersonalInfoType}) {
+            return action.payload
+        }
+    }
+})
+
 
 function* fetchUserInfo() {
     try {

@@ -1,8 +1,8 @@
 import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
-import {LoginInfoType} from "../Types/type";
-import {connect} from "react-redux";
+import {LoginInfoType, PersonalInfoType} from "../Types/type";
+import {connect, useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
@@ -56,14 +56,19 @@ const useStyles = makeStyles({
     }
 });
 
-const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
-    currentValue: LoginInfoType
-}) => {
+const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
+    const currentValue = useSelector((state: CombinedState) => getFormValues("registrationForm")(state) as LoginInfoType)
+    const data: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
+    const userNameData = data.map((elem: PersonalInfoType) => {
+        return elem.username
+    })
+    const userNameErrorMessage = currentValue && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
     const classes = useStyles();
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
                 <Typography className={classes.title} variant={"h4"}>新規登録</Typography>
+                <Typography color={"error"}>{userNameErrorMessage}</Typography>
                     <form onSubmit={props.handleSubmit}>
                         <Grid container xs={12}>
                             <Grid xs={12} className={classes.form}>
@@ -86,7 +91,7 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
                             </Grid>
                         </Grid>
                         <Link to={"/home"}>
-                            <Button disabled={props.invalid || props.pristine} color={"primary"} type={"submit"} variant={"contained"}>新規登録</Button>
+                            <Button disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0} color={"primary"} type={"submit"} variant={"contained"}>新規登録</Button>
                         </Link>
                     </form>
             </CardContent>
@@ -99,10 +104,4 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType> & {
 
 export default reduxForm<LoginInfoType>({
    form: "registrationForm"
-})(
-    connect(
-        (state: CombinedState) => ({
-            currentValue: getFormValues("registrationForm")(state) as LoginInfoType
-        })
-    )
-(NewRegistration))
+})(NewRegistration)

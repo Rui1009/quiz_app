@@ -18,7 +18,8 @@ export interface IntermediateQuizType {
 }
 
 export interface PersonalInfoType {
-    loginInfo: LoginInfoType
+    username: string,
+    password: string,
     icon?: string,
     lank?: number,
     class?: string
