@@ -18,6 +18,8 @@ import Header from "./Header";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 
 interface Props {
     loadEasyQuestion(): void,
@@ -67,7 +69,6 @@ const Home = (props: Props) => {
         <div>
             <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly"}}>
                 <Grid item xs={7}>
-
                     <Grid container xs={12}>
                         <Grid item xs={6} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             <Avatar variant={"square"} src={icon} className={classes.avatar} />
@@ -135,9 +136,13 @@ const Home = (props: Props) => {
                             <Typography variant={"h5"} style={{textAlign: "center", fontWeight: "bold", marginTop: 16, marginBottom: 35}}>順位</Typography>
                             {
                                 newUserArray.map((user: PersonalInfoType) =>
-                                    <div style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
-                                        <Typography>{newUserArray.indexOf(user) + 1}位　{user.username}</Typography>
-                                        <Typography>{user.point}Pt</Typography>
+                                    <div>
+                                        <List>
+                                            <ListItem style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
+                                                <Typography>{newUserArray.indexOf(user) + 1}位　{user.username}</Typography>
+                                                <Typography>{user.point}Pt</Typography>
+                                            </ListItem>
+                                        </List>
                                     </div>
 
                                 )

@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09ad79e0-7fc9-4809-b48c-6b49066adec4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ModificationForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Types/type.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Types/type.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewRegistration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewRegistration.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SettingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SettingPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/dummy.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/dummy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/User.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +23,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/Home.tsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="205">
-                  <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+                <state relative-caret-position="185">
+                  <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
                   <folding>
                     <element signature="e#0#38#0" expanded="true" />
                   </folding>
@@ -335,12 +326,12 @@
       <workItem from="1575684356848" duration="560000" />
       <workItem from="1575689418732" duration="1538000" />
       <workItem from="1575727606017" duration="71834000" />
-      <workItem from="1576307585487" duration="24560000" />
+      <workItem from="1576307585487" duration="25369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169245000" />
+    <option name="totallyTimeSpent" value="170054000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -716,8 +707,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Home.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+        <state relative-caret-position="185">
+          <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
