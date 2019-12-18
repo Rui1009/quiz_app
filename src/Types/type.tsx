@@ -22,7 +22,7 @@ export interface PersonalInfoType {
     password: string,
     icon?: string,
     lank?: number,
-    class?: string
+    point: number
     achievementRate?: number,
     strongField?: string,
     weakField?: string

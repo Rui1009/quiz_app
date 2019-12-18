@@ -15,6 +15,9 @@ import Avatar from "@material-ui/core/Avatar";
 import {useDispatch} from "react-redux";
 import questionLevelReducer from "../modules/QuestionLevel"
 import Header from "./Header";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Divider from "@material-ui/core/Divider";
 
 interface Props {
     loadEasyQuestion(): void,
@@ -25,13 +28,13 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         avatar: {
-            display: "flex",
-            margin: theme.spacing(1),
             height: "auto",
-            width: "auto"
+            width: "40%",
+            borderBottom: "1px solid",
+            borderRight: "1px solid"
         },
-        wrap: {
-
+        card: {
+            backgroundColor: "lightblue",
     }})
 )
 
@@ -43,67 +46,111 @@ const Home = (props: Props) => {
     const index: number = userDetailInfo.findIndex(({username}) => username === user)
     const playingUser: PersonalInfoType = userDetailInfo[index]
     dispatch(playingUserSliceReducer.actions.setPlayingUser(playingUser))
-    const classes = useStyles()
-    return (
-    <Grid container xs={12} justify={"space-around"}>
-        <Grid item xs={3}>
-            <Avatar variant={"square"} src={playingUser.icon} className={classes.avatar} />
-        </Grid>
-        <Grid item xs={6}>
-            <ul className={classes.wrap}>
-                <Typography>名前:</Typography>
-                <Typography variant={"h5"}>{playingUser.username}</Typography>
-                <Typography>レベル:</Typography>
-                <Typography variant={"h5"}>{playingUser.class}</Typography>
-            </ul>
-        </Grid>
-        <Grid item xs={6}>
-            <ul>
-                <Typography>順位:</Typography>
-                <Typography variant={"h5"}>{playingUser.lank}位</Typography>
-                <Typography>得意分野:</Typography>
-                <Typography variant={"h5"}>{playingUser.strongField}</Typography>
-            </ul>
-        </Grid>
-        <Grid item xs={6}>
-            <ul>
-                <Typography>クリアした問題:</Typography>
-                <Typography variant={"h5"}>{playingUser.achievementRate}％</Typography>
-                <Typography>苦手分野:</Typography>
-                <Typography variant={"h5"}>{playingUser.weakField}</Typography>
-            </ul>
-        </Grid>
-        <Grid item xs={3}>
-            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
-                dispatch(questionLevelReducer.actions.setQuesionLevel("入門問題"))
-                props.loadEasyQuestion()
-                dispatch(modalReducer.actions.open("questionStartModal"))
-            }}>
-                <Typography variant={"h6"}>入門問題</Typography>
-                <Typography>基本的な用語の選択式問題。</Typography>
-            </Box>
-        </Grid>
 
-        <Grid item xs={3} style={{backgroundColor: "#C5C5C5"}}>
-            <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
-                dispatch(questionLevelReducer.actions.setQuesionLevel("中級問題"))
-                props.loadIntermediateQuestion()
-                dispatch(modalReducer.actions.open("questionStartModal"))
-            }}>
-                <Typography variant={"h6"}>中級問題</Typography>
-                <Typography>用語の記述式問題。</Typography>
-            </Box>
-        </Grid>
-        <Grid item xs={3}>
-            <Box style={{backgroundColor: "#C5C5C5"}}
-                 onClick={() => dispatch(questionLevelReducer.actions.setQuesionLevel("上級問題"))}
-            >
-                <Typography variant={"h6"} style={{backgroundColor: "#C5C5C5"}}>上級問題</Typography>
-                <Typography>複雑な事例問題や、計算問題。</Typography>
-            </Box>
-        </Grid>
+    const icon = playingUser.icon ? playingUser.icon : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEXd3d2ZmJiUk5PS0tLg4ODb29udnJzX19exsbHFxMTBwcGenZ2hoKCtrKylpKTLy8u2tbW8vLyQj4+pqKjgVrqEAAAD6klEQVR4nO3c2XqCMBAFYEkGCKiA9f3ftURwKyJZhMnY81/1ohecLyEbGXc7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDvbzUWpe5/ZP7cT6NSNemyTJlZVljav1NIft43d4Ge6DUvvuWkETV4TndLeWh+oaMVBWv810yFpX0iKRn2u/ejlp0Rjq9z3fJeJIbkfJmOWAfscmFZqSycMhnFaXIiKQd81kSX0bSLj301lMFRiw98lkl9wN7c30HrwruB/ZER58+aqmjqH5KlW/APqKo5U3unc/KuR/bHR2DEgrqp14TxZ3S3A/uis5BAbPsLKURA5tQTiNSFxgwyzoZjUjBAbNMREJqQztp301bCRHJRLShEZFwH5FwLyFhGd5J+24qYIsR8xrKeBFdDp/eJBRwLBU10IgYagJX3VcCVt/URCVsBCQ8RCU8ICG/f9BLQzeHAwFbxH8wW3z/jB9wkPiQUMKRYvAZxiWhiHMM3/P8RyLO9qOWbQIWbXEvoojXsBeRkPvR3UR0UxGdtBe8y1ct96M7Cl58C1h2D0KPaiQc0owC9xcC9hU3QesaGeuZEXUBX7mFfJYZBQw2YoaZkffJt4TT7ie+46mgcfTKb3kqZUH6hGr3iKoWGNCnFUW2oOV8/1LgxcQR5WeHW9BnqVeEL5ZfRqGv4B3l5l1GZUQ34IBKo2YqSpSRecF7gvJTMwmpVHP6gva7IiprUwx1XZfarsLUpfCKoMnj29o83VZ1XVetzqflecLyElWv90I0W3rYtZIyUrtXXgVNtjxKHcQsvqkcioFUt3N7ZNoNG2Z1lDH03D+v2dq75Uemx/o9AQvU52quPuNCO9LuqT4x/ZqEyWJbFaf5aaGfRE5/6i/VIe1FwKsNk1JnO/e9mD3K+vxqtZPyTmPuC7dSe1PpYaoY7HRl/hY/3/473TH17Sf8fiVTNEfTdZ05Nns1ky7tiHF3FARE9DmXWYyY4rsYdwdjEjG901O/ktFl6V1ZCKtWeyO1D1GR9/VeSOxDTci3psWIKQ2ocffzZ6VUcRlzDWpeOjcx6e2BYbhkjlJX6qNZOrMirdNHrTT66eeWo1NpjKf5egH7pU0CCSPvdS9IYbCJKsZzwJ0vtsxpEf/V9rWbkL0R130LLe5GXHUgHbEmXHMuvOK9qLHicuaOcy+83or0EeetzLWnihHnbn+LJswYx5rPHiDO47vCv1En5SxK3Cgg3w7jw4fA87hG0y2m+zEh0x5qs9eQrR4q6odo/HD9bM1mAbm2UOtvDW+YjhX1j9rKD89gmuvtpPQJAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDZL+hwK5fYOO9qAAAAAElFTkSuQmCC"
+
+    function lankCompare(a: PersonalInfoType, b: PersonalInfoType) {
+        let comparison = 0
+        if (a.point < b.point) {
+            comparison = 1
+        } else {
+            comparison = -1
+        } return comparison
+    }
+    const newUserArray = userDetailInfo.slice()
+    newUserArray.sort(lankCompare)
+
+    const classes = useStyles()
+
+    return (
+
+        <div>
+            <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly"}}>
+                <Grid item xs={7}>
+
+                    <Grid container xs={12}>
+                        <Grid item xs={6} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <Avatar variant={"square"} src={icon} className={classes.avatar} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <ul>
+                                <Typography>名前:</Typography>
+                                <Typography variant={"h5"}>{playingUser.username}</Typography>
+                                <hr/>
+                                <Typography>得点:</Typography>
+                                <Typography variant={"h5"}>{playingUser.point}Pt</Typography>
+                                <hr/>
+                            </ul>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <ul>
+                                <Typography>順位:</Typography>
+                                <Typography variant={"h5"}>{playingUser.lank}位</Typography>
+                                <hr/>
+                                <Typography>得意分野:</Typography>
+                                <Typography variant={"h5"}>{playingUser.strongField}</Typography>
+                                <hr/>
+                            </ul>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <ul>
+                                <Typography>クリアした問題:</Typography>
+                                <Typography variant={"h5"}>{playingUser.achievementRate}％</Typography>
+                                <hr/>
+                                <Typography>苦手分野:</Typography>
+                                <Typography variant={"h5"}>{playingUser.weakField}</Typography>
+                                <hr/>
+                            </ul>
+                        </Grid>
+                    </Grid>
+                    <hr/>
+                    <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
+                        dispatch(questionLevelReducer.actions.setQuesionLevel("入門問題"))
+                        props.loadEasyQuestion()
+                        dispatch(modalReducer.actions.open("questionStartModal"))
+                    }}>
+                        <Typography variant={"h6"}>入門問題</Typography>
+                        <Typography>基本的な用語の選択式問題。</Typography>
+                    </Box>
+                    <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
+                        dispatch(questionLevelReducer.actions.setQuesionLevel("中級問題"))
+                        props.loadIntermediateQuestion()
+                        dispatch(modalReducer.actions.open("questionStartModal"))
+                    }}>
+                        <Typography variant={"h6"}>中級問題</Typography>
+                        <Typography>用語の記述式問題。</Typography>
+                    </Box>
+
+                    <Box style={{backgroundColor: "#C5C5C5"}}
+                         onClick={() => dispatch(questionLevelReducer.actions.setQuesionLevel("上級問題"))}
+                    >
+                        <Typography variant={"h6"} style={{backgroundColor: "#C5C5C5"}}>上級問題</Typography>
+                        <Typography>複雑な事例問題や、計算問題。</Typography>
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
+                    <div>
+
+                            <Typography variant={"h5"} style={{textAlign: "center", fontWeight: "bold", marginTop: 16, marginBottom: 35}}>順位</Typography>
+                            {
+                                newUserArray.map((user: PersonalInfoType) =>
+                                    <div style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
+                                        <Typography>{newUserArray.indexOf(user) + 1}位　{user.username}</Typography>
+                                        <Typography>{user.point}Pt</Typography>
+                                    </div>
+
+                                )
+                            }
+
+                    </div>
+                </Grid>
+            </Grid>
+
+
         <QuestionStartModal />
-    </Grid>
+        </div>
+
 
 
 )}

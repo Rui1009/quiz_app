@@ -20,7 +20,7 @@ const Header = () => {
                     <Box display="flex">
                         <img src={logo} height={30}></img>
                         <Box pl={1} mb={-0.3}>
-                            <Typography variant={"h6"}>原価管理クイズ</Typography>
+                            <Typography variant={"h6"} style={{fontWeight: "bolder"}}>原価管理クイズ</Typography>
                         </Box>
                     </Box>
                 </Grid>

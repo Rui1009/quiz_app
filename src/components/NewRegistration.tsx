@@ -2,7 +2,7 @@ import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType, PersonalInfoType} from "../Types/type";
-import {connect, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
@@ -11,6 +11,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import {Link} from "react-router-dom";
+import logo from "../genkan_logo.svg"
+import Box from "@material-ui/core/Box";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -44,9 +46,10 @@ const useStyles = makeStyles({
     },
     title: {
         textAlign: "center",
+        marginTop: 30
     },
-    pos: {
-        marginBottom: 12,
+    img: {
+      display: "flex"
     },
     content: {
         textAlign: "center"
@@ -67,9 +70,13 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Typography className={classes.title} variant={"h4"}>新規登録</Typography>
-                <Typography color={"error"}>{userNameErrorMessage}</Typography>
-                    <form onSubmit={props.handleSubmit}>
+                <Box className={classes.img}>
+                    <img src={logo} style={{width: "45%"}} />
+                </Box>
+                <Typography variant={"h6"} style={{fontWeight: "bolder", fontSize: "x-large", margin: "auto"}}>〜原価管理QUIZ〜</Typography>
+                <form onSubmit={props.handleSubmit}>
+                        <Typography className={classes.title} variant={"h5"}>新規登録</Typography>
+                        <Typography color={"error"}>{userNameErrorMessage}</Typography>
                         <Grid container xs={12}>
                             <Grid xs={12} className={classes.form}>
                             <Field

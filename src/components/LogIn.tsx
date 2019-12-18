@@ -13,6 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import {Link} from "react-router-dom";
 import loginSlice, {loginType} from "../modules/LogIn";
 import {userSliceReducer} from "../modules/User";
+import logo from "../genkan_logo.svg"
+import Box from "@material-ui/core/Box";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -46,10 +48,10 @@ const useStyles = makeStyles({
     },
     title: {
         textAlign: "center",
-        marginBottom: 12
+        marginTop: 30
     },
-    pos: {
-        marginBottom: 12,
+    img: {
+        display: "flex"
     },
     content: {
         textAlign: "center",
@@ -67,9 +69,13 @@ const LogIn = (props: InjectedFormProps<LoginInfoType>) => {
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Typography className={classes.title} variant={"h4"}>ログイン</Typography>
-                <Typography style={{color: "red"}}>{login.errorMessage}</Typography>
+                <Box className={classes.img}>
+                    <img src={logo} style={{width: "45%"}}/>
+                </Box>
+                <Typography variant={"h6"} style={{fontWeight: "bolder", fontSize: "x-large", margin: "auto"}}>〜原価管理QUIZ〜</Typography>
                 <form onSubmit={props.handleSubmit}>
+                    <Typography className={classes.title} variant={"h5"}>ログイン</Typography>
+                    <Typography color={"error"}>{login.errorMessage}</Typography>
                     <Grid container xs={12}>
                         <Grid xs={12} className={classes.form}>
                             <Field
@@ -107,6 +113,8 @@ const LogIn = (props: InjectedFormProps<LoginInfoType>) => {
                 <a href="/registration">こちら</a>
             </CardContent>
         </Card>
+
+
 
 
 

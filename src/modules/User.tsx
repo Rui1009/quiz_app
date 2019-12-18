@@ -1,6 +1,5 @@
 import React from "react"
 import actionCreatorFactory from "typescript-fsa";
-import {reducerWithInitialState} from "typescript-fsa-reducers";
 import {PersonalInfoType} from "../Types/type";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
@@ -40,7 +39,8 @@ export const userDetailSliceReducer = createSlice({
 
 const initialPlayingUserState: PersonalInfoType = {
     username: "",
-    password: ""
+    password: "",
+    point: 0
 }
 
 export const playingUserSliceReducer = createSlice({
