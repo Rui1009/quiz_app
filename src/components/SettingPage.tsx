@@ -38,7 +38,7 @@ const SettingPage = () => {
     const userNameErrorMessage = currentValue && currentValue.username !== playingUser.username && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
     return(
         <div>
-            <Typography variant={"h4"} style={{textAlign: "center"}}>プロフィール設定</Typography>
+            <Typography variant={"h5"} style={{textAlign: "center"}}>プロフィール設定</Typography>
             <Typography color={"error"}>{userNameErrorMessage}</Typography>
             <ModificationForm initialValues={{
                 username: playingUser.username,
