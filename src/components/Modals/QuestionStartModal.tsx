@@ -37,17 +37,21 @@ const QuestionStartModal = () => {
                 </Grid>
             </DialogTitle>
             <DialogContent>
-                <ul>
-                    <li><Typography>問題は全部で10問です。</Typography></li>
-                    <li><Typography color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
-                </ul>
-                <Link to="/quiz">
-                    <Button color={"primary"} variant={"contained"} onClick={() => {
-                        dispatch(modalReducer.actions.close("questionStartModal"))
-                        dispatch(answerSliceReducer.actions.resetAnswer())
-                        dispatch(resultSliceReducer.actions.resetResult())
-                    }}>スタート</Button>
-                </Link>
+                    <ul>
+                        <li><Typography>問題は全部で10問です。</Typography></li>
+                        <li><Typography variant={"h6"} color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
+                    </ul>
+                    <Link to="/quiz">
+                        <Button
+                            style={{width: "80%"}}
+                            color={"primary"}
+                            variant={"contained"}
+                            onClick={() => {
+                                dispatch(modalReducer.actions.close("questionStartModal"))
+                                dispatch(answerSliceReducer.actions.resetAnswer())
+                                dispatch(resultSliceReducer.actions.resetResult())
+                            }}>スタート</Button>
+                    </Link>
             </DialogContent>
         </Dialog>
     </Grow>
