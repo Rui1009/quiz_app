@@ -10,11 +10,12 @@ import CardContent from "@material-ui/core/CardContent";
 import {playingUserSliceReducer} from "../modules/User";
 import ModificationForm from "./ModificationForm";
 
-export const renderField = (
+export const SettingPageRenderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
 ) => {
     return (
         <TextField
+            style={{width: "50%"}}
             label={props.label}
             error={props.meta.touched && props.meta.error}
             helperText={props.meta.touched && props.meta.error}
@@ -37,7 +38,7 @@ const SettingPage = () => {
     const userNameErrorMessage = currentValue && currentValue.username !== playingUser.username && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
     return(
         <div>
-            <Typography variant={"h5"}>設定</Typography>
+            <Typography variant={"h4"} style={{textAlign: "center"}}>プロフィール設定</Typography>
             <Typography color={"error"}>{userNameErrorMessage}</Typography>
             <ModificationForm initialValues={{
                 username: playingUser.username,

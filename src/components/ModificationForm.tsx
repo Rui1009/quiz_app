@@ -2,10 +2,11 @@ import React from "react"
 import {Field, getFormValues, InjectedFormProps, reduxForm} from "redux-form";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
 import Button from "@material-ui/core/Button";
-import {renderField} from "./SettingPage";
+import {SettingPageRenderField} from "./SettingPage";
 import {useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import {PersonalInfoType} from "../Types/type";
+import {Grid} from "@material-ui/core";
 
 const ModificationForm = (props: InjectedFormProps) => {
     const playingUser = useSelector((state: CombinedState) => state.playingUser)
@@ -18,27 +19,36 @@ const ModificationForm = (props: InjectedFormProps) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field
-                label={"ユーザー名"}
-                name="username"
-                component={renderField}
-                type={"text"}
-                validate={requiredValidation}
-            />
-            <Field
-                label={"パスワード"}
-                name="password"
-                component={renderField}
-                type={"text"}
-                validate={[requiredValidation, passLengthValidation]}
-            />
-            <Button
-                disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0}
-                color={"primary"}
-                type={"submit"}
-                variant={"contained"}
-                onClick={() => alert("変更しました。")}
-            >変更</Button>
+            <Grid container xs={12}>
+                <Grid item xs={12} style={{marginBottom: 30, marginTop: 50}}>
+                    <Field
+                        label={"ユーザー名"}
+                        name="username"
+                        component={SettingPageRenderField}
+                        type={"text"}
+                        validate={requiredValidation}
+                    />
+                </Grid>
+                <Grid item xs={12} style={{marginBottom: 30}}>
+                    <Field
+                        style={{width: "50%"}}
+                        label={"パスワード"}
+                        name="password"
+                        component={SettingPageRenderField}
+                        type={"text"}
+                        validate={[requiredValidation, passLengthValidation]}
+                    />
+                </Grid>
+                <Grid item container xs={12} justify={"center"}>
+                    <Button
+                        disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0}
+                        color={"primary"}
+                        type={"submit"}
+                        variant={"contained"}
+                        onClick={() => alert("変更しました。")}
+                    >変更</Button>
+                </Grid>
+            </Grid>
         </form>
     )
 }
