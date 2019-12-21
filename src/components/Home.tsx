@@ -20,6 +20,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 
 interface Props {
     loadEasyQuestion(): void,
@@ -70,11 +72,16 @@ const Home = (props: Props) => {
             <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly"}}>
                 <Grid item xs={7}>
                     <Grid container xs={12}>
-                        <Grid item xs={6} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <Card>
+                    <Grid container xs={12}>
+                        <Grid item xs={12} style={{backgroundColor: "#00baed"}}>
+                            <Typography variant={"h5"} style={{fontWeight: "bold", color: "white", padding: 5}}>プロフィール</Typography>
+                        </Grid>
+                        <Grid item xs={6} style={{display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#d9f4fd"}}>
                             <Avatar variant={"square"} src={icon} className={classes.avatar} />
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{backgroundColor: "#d9f4fd"}}>
                             <ul>
                                 <Typography>名前:</Typography>
                                 <Typography variant={"h5"}>{playingUser.username}</Typography>
@@ -84,7 +91,7 @@ const Home = (props: Props) => {
                                 <hr/>
                             </ul>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{backgroundColor: "#d9f4fd"}}>
                             <ul>
                                 <Typography>順位:</Typography>
                                 <Typography variant={"h5"}>{playingUser.lank}位</Typography>
@@ -94,7 +101,7 @@ const Home = (props: Props) => {
                                 <hr/>
                             </ul>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{backgroundColor: "#d9f4fd"}}>
                             <ul>
                                 <Typography>クリアした問題:</Typography>
                                 <Typography variant={"h5"}>{playingUser.achievementRate}％</Typography>
@@ -105,38 +112,85 @@ const Home = (props: Props) => {
                             </ul>
                         </Grid>
                     </Grid>
-                    <hr/>
-                    <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
-                        dispatch(questionLevelReducer.actions.setQuesionLevel("入門問題"))
-                        props.loadEasyQuestion()
-                        dispatch(modalReducer.actions.open("questionStartModal"))
-                    }}>
-                        <Typography variant={"h6"}>入門問題</Typography>
-                        <Typography>基本的な用語の選択式問題。</Typography>
-                    </Box>
-                    <Box style={{backgroundColor: "#C5C5C5"}} onClick={() => {
-                        dispatch(questionLevelReducer.actions.setQuesionLevel("中級問題"))
-                        props.loadIntermediateQuestion()
-                        dispatch(modalReducer.actions.open("questionStartModal"))
-                    }}>
-                        <Typography variant={"h6"}>中級問題</Typography>
-                        <Typography>用語の記述式問題。</Typography>
-                    </Box>
+                    </Card>
+                    <Grid item xs={12} style={{paddingTop: 15}}>
+                        <Card>
+                            <Grid container xs={12}>
+                                <Grid item xs={12} style={{backgroundColor: "#00baed"}}>
+                                    <Typography variant={"h5"} style={{fontWeight: "bold", color: "white", padding: 5}}>問題にチャレンジ！</Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12}}>
+                                    <Grid container xs={12} direction={"row"} justify={"space-around"}>
+                                        <Grid item xs={4}>
+                                            <Fab
+                                                style={{width: "100%"}}
+                                                variant={"extended"}
+                                                onClick={() => {
+                                                dispatch(questionLevelReducer.actions.setQuesionLevel("入門問題"))
+                                                props.loadEasyQuestion()
+                                                dispatch(modalReducer.actions.open("questionStartModal"))
+                                            }}>
+                                                入門問題
+                                            </Fab>
+                                        </Grid>
+                                        <Grid item xs={6} style={{display: "flex", alignItems: "center"}}>
+                                            <Typography>基本的な用語の選択式問題。</Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12}}>
+                                    <Grid container xs={12} direction={"row"} justify={"space-around"}>
+                                        <Grid item xs={4}>
+                                            <Fab
+                                                style={{width: "100%"}}
+                                                variant={"extended"}
+                                                onClick={() => {
+                                                dispatch(questionLevelReducer.actions.setQuesionLevel("中級問題"))
+                                                props.loadIntermediateQuestion()
+                                                dispatch(modalReducer.actions.open("questionStartModal"))
+                                            }}>
+                                                中級問題
 
-                    <Box style={{backgroundColor: "#C5C5C5"}}
-                         onClick={() => dispatch(questionLevelReducer.actions.setQuesionLevel("上級問題"))}
-                    >
-                        <Typography variant={"h6"} style={{backgroundColor: "#C5C5C5"}}>上級問題</Typography>
-                        <Typography>複雑な事例問題や、計算問題。</Typography>
-                    </Box>
+                                            </Fab>
+                                        </Grid>
+                                        <Grid item xs={6} style={{display: "flex", alignItems: "center"}}>
+                                            <Typography>用語の記述式問題。</Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12, paddingBottom: 12}}>
+                                    <Grid container xs={12} direction={"row"} justify={"space-around"}>
+                                        <Grid item xs={4}>
+                                            <Fab
+                                                style={{width: "100%"}}
+                                                variant={"extended"}
+                                                 onClick={() => dispatch(questionLevelReducer.actions.setQuesionLevel("上級問題"))}
+                                            >
+                                                上級問題
+                                            </Fab>
+                                        </Grid>
+                                        <Grid item xs={6} style={{display: "flex", alignItems: "center"}}>
+                                            <Typography>複雑な事例問題や、計算問題。</Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+
+
+
+                        <QuestionStartModal />
+                    </Grid>
                 </Grid>
                 <Grid item xs={4}>
+                    <Card>
                     <div>
 
-                            <Typography variant={"h5"} style={{textAlign: "center", fontWeight: "bold", marginTop: 16, marginBottom: 35}}>順位</Typography>
+                            <Typography variant={"h5"} style={{color: "white", fontWeight: "bold", padding: 5, backgroundColor: "#00baed"}}>順位</Typography>
                             {
                                 newUserArray.map((user: PersonalInfoType) =>
-                                    <div>
+                                    <div style={{backgroundColor: "#d9f4fd"}}>
                                         <List>
                                             <ListItem style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
                                                 <Typography>{newUserArray.indexOf(user) + 1}位　{user.username}</Typography>
@@ -149,11 +203,9 @@ const Home = (props: Props) => {
                             }
 
                     </div>
+                    </Card>
                 </Grid>
             </Grid>
-
-
-        <QuestionStartModal />
         </div>
 
 
