@@ -7,6 +7,7 @@ import {connect, useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import _ from "lodash"
+import Card from "@material-ui/core/Card";
 
 
 
@@ -21,14 +22,14 @@ const EasyQuiz = () => {
     const result = useSelector((state: CombinedState) => state.result)
     const question = useSelector((state: CombinedState) => state.question)
     return(
-        <Grid container xs={12}>
+        <Grid container xs={12} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
             <Grid item container xs={12} justify={"center"}>
                 <Typography variant={"h6"}>第{quizNum + 1}問</Typography>
             </Grid>
             <Grid item container xs={12} justify={"center"}>
                 <Typography variant={"h6"}>QUESTION</Typography>
             </Grid>
-            <Grid item container xs={12} justify={"center"}>
+            <Grid item container xs={12} justify={"center"} style={{marginBottom: 35}}>
                 <Typography>{question[quizNum].question}</Typography>
             </Grid>
             {
@@ -76,9 +77,11 @@ const EasyQuiz = () => {
                 <Grid item xs={7} container justify={"center"}>
                     {
                         _.range(10).map((num: number) => (
-                            <Grid style={{borderRight: "solid 0.5px"}}>
-                                <Typography>第{num + 1}問</Typography>
-                                <Typography style={{textAlign: "center"}}>{result[num]}</Typography>
+                            <Grid>
+                                <Card style={{borderRight: "solid 0.5px"}}>
+                                    <Typography style={{backgroundColor: "#E5E3DE"}}>第{num + 1}問</Typography>
+                                    <Typography style={{textAlign: "center", color: result[num] === "O" ? "red" : "blue"}}>{result[num]}</Typography>
+                                </Card>
                             </Grid>
                         ))
                     }
