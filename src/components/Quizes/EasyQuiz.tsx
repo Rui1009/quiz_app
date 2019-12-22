@@ -24,13 +24,47 @@ const EasyQuiz = () => {
     return(
         <Grid container xs={12} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
             <Grid item container xs={12} justify={"center"}>
-                <Typography variant={"h6"}>第{quizNum + 1}問</Typography>
-            </Grid>
-            <Grid item container xs={12} justify={"center"}>
-                <Typography variant={"h6"}>QUESTION</Typography>
-            </Grid>
-            <Grid item container xs={12} justify={"center"} style={{marginBottom: 35}}>
-                <Typography>{question[quizNum].question}</Typography>
+                <Card style={{backgroundColor: "#005000", width: "55%", border: "solid 5px brown", marginBottom: 20}}>
+                    <Grid item container xs={12} justify={"center"}>
+                        <Typography variant={"h6"} style={{color: "white"}}>第{quizNum + 1}問</Typography>
+                    </Grid>
+                    <Grid item container xs={12} justify={"center"}>
+                        <Typography variant={"h6"} style={{color: "white"}}>QUESTION</Typography>
+                    </Grid>
+                    <Grid item container xs={12} justify={"center"} style={{marginBottom: 35}}>
+                        <Typography style={{color: "white"}}>{question[quizNum].question}</Typography>
+                    </Grid>
+                    <Grid item container xs={12} justify={"center"}>
+                        <Grow in={answerGrow}>
+                            <Grid>
+                                { question[quizNum].answer === answer[quizNum] ?
+                                    <Typography variant={"h5"} style={{color: "white"}}>⭕️正解: {question[quizNum].answer}</Typography>
+                                    :
+                                    <Typography variant={"h5"} style={{color: "white"}}>❌不正解/ 正解:{question[quizNum].answer}</Typography>
+                                }
+                                <Typography style={{color: "white"}}>{question[quizNum].description}</Typography>
+                                {  quizNum !== 9 ?
+                                    <Button
+                                        variant={"contained"} onClick={() => {
+                                        dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
+                                        dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
+                                        handleQuizNum(quizNum)
+                                    }}>次の問題へ</Button>
+                                    :
+                                    <Link to="/answer_result">
+                                        <Button variant={"contained"}
+                                                color={"default"}
+                                                onClick={() => {
+                                                    dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
+                                                    dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
+                                                }}>解答結果を確認する
+                                        </Button>
+                                    </Link>
+                                }
+                            </Grid>
+                        </Grow>
+                    </Grid>
+                </Card>
             </Grid>
             {
                 question[quizNum].option.map((elem: string) => (
@@ -43,36 +77,6 @@ const EasyQuiz = () => {
                         }}>{elem}</Button>
                     </Grid>
                 ))}
-                <Grid item container xs={12} justify={"center"}>
-                    <Grow in={answerGrow}>
-                        <Grid>
-                            { question[quizNum].answer === answer[quizNum] ?
-                                <Typography variant={"h5"} style={{color: "green"}}>⭕️正解: {question[quizNum].answer}</Typography>
-                                :
-                                <Typography variant={"h5"} style={{color: "red"}}>❌不正解/ 正解:{question[quizNum].answer}</Typography>
-                            }
-                            <Typography>{question[quizNum].description}</Typography>
-                            {  quizNum !== 9 ?
-                                <Button
-                                    variant={"contained"} onClick={() => {
-                                    dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
-                                    dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
-                                    handleQuizNum(quizNum)
-                                }}>次の問題へ</Button>
-                                :
-                                <Link to="/answer_result">
-                                    <Button variant={"contained"}
-                                            color={"default"}
-                                            onClick={() => {
-                                                dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
-                                                dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
-                                            }}>解答結果を確認する
-                                    </Button>
-                                </Link>
-                            }
-                        </Grid>
-                    </Grow>
-                </Grid>
             <Grid item container xs={12} justify={"center"}>
                 <Grid item xs={7} container justify={"center"}>
                     {
