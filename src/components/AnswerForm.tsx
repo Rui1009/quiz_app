@@ -8,9 +8,11 @@ import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {answerSliceReducer} from "../modules/Answer";
 
+
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
 ) => {
+
     return (
         <TextField
             label={props.label}
@@ -18,7 +20,10 @@ export const renderField = (
             helperText={props.meta.touched && props.meta.error}
             type={props.type}
             InputProps={{
-                endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment>
+                endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment>,
+                style: {
+                    color: "white"
+                }
             }}
             {...props.input}
         />
