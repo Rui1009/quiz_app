@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09ad79e0-7fc9-4809-b48c-6b49066adec4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/AnswerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AnswerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AnswerResult.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AnswerResult.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +17,7 @@
     <favorites_list name="quiz_app" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5108434">
+    <splitter split-orientation="horizontal" split-proportion="0.637751">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -28,6 +27,18 @@
                   <caret line="119" column="129" selection-start-line="119" selection-start-column="129" selection-end-line="119" selection-end-column="129" />
                   <folding>
                     <element signature="e#0#38#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/Header.tsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="344">
+                  <caret line="26" column="58" lean-forward="true" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -45,7 +56,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/LogIn.tsx">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="286">
@@ -57,29 +68,29 @@
               </provider>
             </entry>
           </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/AnswerResult.tsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="234">
-                  <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+                <state relative-caret-position="294">
+                  <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
                   <folding>
-                    <element signature="e#0#37#0" expanded="true" />
+                    <element signature="e#0#25#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/AnswerForm.tsx">
+            <entry file="file://$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+                <state relative-caret-position="366">
+                  <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
                   <folding>
-                    <element signature="e#0#25#0" expanded="true" />
+                    <element signature="e#0#37#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -141,7 +152,6 @@
         <option value="$PROJECT_DIR$/src/util/CustomHooks.tsx" />
         <option value="$PROJECT_DIR$/src/components/Auth/Auth.tsx" />
         <option value="$PROJECT_DIR$/src/modules/Answer.tsx" />
-        <option value="$PROJECT_DIR$/src/components/AnswerResult.tsx" />
         <option value="$PROJECT_DIR$/src/modules/RootModule.tsx" />
         <option value="$PROJECT_DIR$/src/util/Validation.tsx" />
         <option value="$PROJECT_DIR$/src/Types/type.tsx" />
@@ -158,6 +168,7 @@
         <option value="$PROJECT_DIR$/src/components/Quizes/EasyQuiz.tsx" />
         <option value="$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx" />
         <option value="$PROJECT_DIR$/src/components/AnswerForm.tsx" />
+        <option value="$PROJECT_DIR$/src/components/AnswerResult.tsx" />
       </list>
     </option>
   </component>
@@ -296,12 +307,12 @@
       <workItem from="1575684356848" duration="560000" />
       <workItem from="1575689418732" duration="1538000" />
       <workItem from="1575727606017" duration="71834000" />
-      <workItem from="1576307585487" duration="53049000" />
+      <workItem from="1576307585487" duration="58405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197734000" />
+    <option name="totallyTimeSpent" value="203090000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -381,12 +392,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/AnswerResult.tsx</url>
-          <line>17</line>
+          <line>24</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/AnswerResult.tsx</url>
-          <line>29</line>
+          <line>78</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -494,16 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AnswerResult.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/Modal.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -588,16 +589,6 @@
     <entry file="file://$PROJECT_DIR$/src/genkan_logo.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Header.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="54" lean-forward="true" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Grid/Grid.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
@@ -662,16 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="463">
@@ -699,7 +680,37 @@
     <entry file="file://$PROJECT_DIR$/src/components/AnswerForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Quizes/IntermediateQuiz.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Header.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="26" column="58" lean-forward="true" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AnswerResult.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="39" column="32" lean-forward="true" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
