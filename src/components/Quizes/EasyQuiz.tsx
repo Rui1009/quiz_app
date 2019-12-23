@@ -1,9 +1,9 @@
-import React, {useEffect, useLayoutEffect, useState} from "react"
+import React, {useState} from "react"
 import {Button, Typography} from "@material-ui/core";
 import Grow from "@material-ui/core/Grow";
 import {CombinedState} from "../../modules/RootModule";
 import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "../../modules/Answer";
-import {connect, useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import _ from "lodash"
@@ -48,7 +48,7 @@ const EasyQuiz = () => {
                                         variant={"contained"} onClick={() => {
                                         dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
                                         dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
-                                        handleQuizNum(quizNum)
+                                        setTimeout(() =>  handleQuizNum(quizNum), 200)
                                     }}>次の問題へ</Button>
                                     :
                                     <Link to="/answer_result">
