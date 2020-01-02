@@ -97,7 +97,7 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
                             />
                             </Grid>
                         </Grid>
-                        <Link to={"/home"}>
+                        <Link to={"/home"} style={{textDecoration: "none"}}>
                             <Button disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0} color={"primary"} type={"submit"} variant={"contained"}>新規登録</Button>
                         </Link>
                     </form>

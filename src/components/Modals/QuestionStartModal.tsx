@@ -41,7 +41,7 @@ const QuestionStartModal = () => {
                         <li><Typography>問題は全部で10問です。</Typography></li>
                         <li><Typography variant={"h6"} color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
                     </ul>
-                    <Link to="/quiz">
+                    <Link to="/quiz" style={{textDecoration: "none"}}>
                         <Button
                             style={{width: "80%"}}
                             color={"primary"}

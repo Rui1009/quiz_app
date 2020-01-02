@@ -55,7 +55,7 @@ const IntermediateQuiz = () => {
                                         setTimeout(() =>  handleQuizNum(quizNum), 200)
                                     }}>次の問題へ</Button>
                                     :
-                                    <Link to="/answer_result">
+                                    <Link to="/answer_result" style={{textDecoration: "none"}}>
                                         <Button variant={"contained"}
                                                 color={"default"}
                                                 onClick={() => {

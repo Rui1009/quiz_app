@@ -78,7 +78,7 @@ const AnswerResult = () => {
             )
         }
             <Grid item container xs={12} justify={"flex-end"}>
-                <Link to={"/home"}>
+                <Link to={"/home"} style={{textDecoration: "none"}}>
                     <Button variant={"contained"} color={"secondary"}>ホームへ戻る</Button>
                 </Link>
             </Grid>

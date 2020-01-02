@@ -25,7 +25,7 @@ const Header = () => {
                     </Box>
                 </Grid>
                 <Grid item container xs={2} justify={"flex-end"}>
-                    <Link to={"/setting_page"}>
+                    <Link to={"/setting_page"} style={{textDecoration: "none"}}>
                         <IconButton color={"inherit"}>
                             <AccountCircle />
                         </IconButton>

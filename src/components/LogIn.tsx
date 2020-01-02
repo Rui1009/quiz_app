@@ -96,7 +96,7 @@ const LogIn = (props: InjectedFormProps<LoginInfoType>) => {
                             />
                         </Grid>
                     </Grid>
-                    <Link to={"/home"}>
+                    <Link to={"/home"} style={{textDecoration: "none"}}>
                     <Button
                         disabled={props.invalid || props.pristine}
                         color={"primary"}
