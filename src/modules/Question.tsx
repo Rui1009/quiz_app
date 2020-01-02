@@ -42,7 +42,7 @@ export const questionSliceReducer = createSlice({
 
 function* fetchEasyQuestions() {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/easy_quiz_data"))["data"];
+        const result = (yield call(Api.get, "http://localhost:3000/api/easyQuiz"))["data"];
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]
@@ -58,7 +58,7 @@ function* fetchEasyQuestions() {
 
 function* fetchInterMediateQuestion() {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/intermediate_quiz_data"))["data"];
+        const result = (yield call(Api.get, "http://localhost:3000/api/intermediateQuiz"))["data"];
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]

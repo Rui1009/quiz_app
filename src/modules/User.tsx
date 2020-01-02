@@ -56,7 +56,7 @@ export const playingUserSliceReducer = createSlice({
 
 function* fetchUserInfo() {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/personal_info"))["data"]
+        const result = (yield call(Api.get, "http://localhost:3000/api/personalInfo"))["data"]
         console.log(result)
         yield put(userDetailSliceReducer.actions.setUserDetail(result))
     } catch (e) {
