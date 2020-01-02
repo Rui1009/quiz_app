@@ -174,27 +174,27 @@
       "weakField": "ない"
     },
     {
-      "username": "織田信長",
+      "username": "ユーザーA",
       "icon": "",
-      "lank": "武将",
+      "lank": 2,
       "point": 2,
       "achievementRate": 86,
       "strongField": "戦",
       "weakField": "優しさ"
     },
     {
-      "username": "徳川家康",
+      "username": "ユーザーB",
       "icon": "",
-      "lank": "征夷大将軍",
+      "lank": 3,
       "point": 3,
       "achievementRate": 77,
       "strongField": "天下統一",
       "weakField": "顔面偏差値"
     },
     {
-      "username": "豊臣秀吉",
+      "username": "ユーザーC",
       "icon": "",
-      "lank": "グローバルエリート",
+      "lank": 4,
       "point": 4,
       "achievementRate": 55,
       "strongField": "朝鮮侵攻",
