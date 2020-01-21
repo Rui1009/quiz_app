@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect, Provider} from "react-redux";
+import {connect, Provider, useDispatch} from "react-redux";
 import './App.css';
 import NewRegistration from "./components/NewRegistration";
 import {buildStore, sagaMiddleware} from "./store";
@@ -11,9 +11,7 @@ import AnswerResult from "./components/AnswerResult";
 import Auth from "./components/Auth/Auth";
 import Header from "./components/Header";
 import {CombinedState} from "./modules/RootModule";
-import {Dispatch} from "redux";
-import {Action} from "typescript-fsa";
-import {SetUserActionCreator} from "./modules/User";
+import {loadUserSliceReducer} from "./modules/User";
 import SettingPage from "./components/SettingPage";
 
 interface Props {
@@ -23,8 +21,9 @@ interface Props {
 
 
 const App = (props: Props) => {
+    const dispatch = useDispatch()
     useEffect(() => {
-        props.loadUser()
+        dispatch(loadUserSliceReducer.actions.loadUser({param: "るい"}))
     }, [props.user]);
   return (
 
@@ -53,11 +52,7 @@ const mapStateToProps = (state: CombinedState) => ({
     user: state.user
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
-    loadUser: () => {dispatch(SetUserActionCreator.loadUser())}
-})
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(App);

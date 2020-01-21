@@ -8,13 +8,15 @@ export interface EasyQuizType {
    question: string,
    option: string[]
    answer: string,
-   description: string
+   description: string,
+    field: string
 }
 
 export interface IntermediateQuizType {
     question: string,
     answer: string,
-    description: string
+    description: string,
+    field: string
 }
 
 export interface PersonalInfoType {
