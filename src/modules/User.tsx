@@ -1,19 +1,19 @@
 import React from "react"
-import actionCreatorFactory from "typescript-fsa";
 import {PersonalInfoType} from "../Types/type";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
 import {createSlice} from "@reduxjs/toolkit";
 
-const actionTypes = {
-    LOAD_USER: "LOAD_USER"
-}
 
-const actionCreator = actionCreatorFactory();
-
-export const SetUserActionCreator = {
-    loadUser: actionCreator<void>(actionTypes.LOAD_USER)
-}
+export const loadUserSliceReducer = createSlice({
+    name: "loadUser",
+    initialState: "",
+    reducers: {
+        loadUser(state: string, action: {payload: {param: string}}) {
+            return state
+        }
+    }
+})
 
 export const userSliceReducer = createSlice({
     name: "user",
@@ -54,9 +54,9 @@ export const playingUserSliceReducer = createSlice({
 })
 
 
-function* fetchUserInfo() {
+function* fetchUserInfo(action: {type: string, payload: {param: string}}) {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/api/personalInfo"))["data"]
+        const result = (yield call(Api.get, "http://localhost:3000/personal_info"))["data"]
         console.log(result)
         yield put(userDetailSliceReducer.actions.setUserDetail(result))
     } catch (e) {
@@ -65,4 +65,4 @@ function* fetchUserInfo() {
     }
 }
 
-export const userSaga = [takeLatest(actionTypes.LOAD_USER, fetchUserInfo)]
+export const userSaga = [takeLatest(loadUserSliceReducer.actions.loadUser, fetchUserInfo)]

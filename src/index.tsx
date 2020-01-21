@@ -11,6 +11,7 @@ import {Provider} from "react-redux";
 
 ReactDOM.render(
     <Provider store={buildStore}>
+        //@ts-ignore
         <App />
     </Provider>
     ,

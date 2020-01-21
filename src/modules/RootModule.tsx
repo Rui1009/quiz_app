@@ -3,10 +3,10 @@ import QuestionLevelReducer from "./QuestionLevel";
 import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
 import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./Answer";
-import {questionSliceReducer} from "./Question";
+import {loadEasyQuizSliceReducer, loadIntermediateQuizSliceReducer, questionSliceReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
-import {playingUserSliceReducer, userDetailSliceReducer, userSliceReducer} from "./User";
+import {loadUserSliceReducer, playingUserSliceReducer, userDetailSliceReducer, userSliceReducer} from "./User";
 
 
 export interface CombinedState {
@@ -20,7 +20,10 @@ export interface CombinedState {
     login: loginType,
     user: string,
     userDetailInfo: PersonalInfoType[],
-    playingUser: PersonalInfoType
+    playingUser: PersonalInfoType,
+    loadUser: string,
+    loadEasyQuiz: string,
+    loadIntermediateQuiz: string
 }
 
 
@@ -44,5 +47,8 @@ export const rootReducer = combineReducers<CombinedState>({
     login: loginReducer.reducer,
     user: userSliceReducer.reducer,
     userDetailInfo: userDetailSliceReducer.reducer,
-    playingUser: playingUserSliceReducer.reducer
+    playingUser: playingUserSliceReducer.reducer,
+    loadUser: loadUserSliceReducer.reducer,
+    loadEasyQuiz: loadEasyQuizSliceReducer.reducer,
+    loadIntermediateQuiz: loadIntermediateQuizSliceReducer.reducer
 })

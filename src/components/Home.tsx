@@ -1,5 +1,5 @@
 import React, {useEffect} from "react"
-import {Box, createStyles, Grid, Theme} from "@material-ui/core";
+import {createStyles, Grid, Theme} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {CombinedState} from "../modules/RootModule";
 import {Dispatch} from "redux";
@@ -7,27 +7,21 @@ import {Action} from "typescript-fsa";
 import {connect, useSelector} from "react-redux";
 import QuestionStartModal from "./Modals/QuestionStartModal";
 import modalReducer from "../modules/Modal"
-import {SetQuestionActionCreator} from "../modules/Question";
-import {playingUserSliceReducer, SetUserActionCreator} from "../modules/User";
+import {
+    loadEasyQuizSliceReducer,
+    loadIntermediateQuizSliceReducer,
+} from "../modules/Question";
+import {loadUserSliceReducer, playingUserSliceReducer} from "../modules/User";
 import {PersonalInfoType} from "../Types/type";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Avatar from "@material-ui/core/Avatar";
 import {useDispatch} from "react-redux";
 import questionLevelReducer from "../modules/QuestionLevel"
-import Header from "./Header";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 
-interface Props {
-    loadEasyQuestion(): void,
-    loadIntermediateQuestion(): void,
-    loadUser(): void
-}
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -43,7 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 
-const Home = (props: Props) => {
+const Home = () => {
+    useEffect(() => {
+        dispatch(loadUserSliceReducer.actions.loadUser({param: user}))
+    })
     const dispatch = useDispatch()
     const user: string = useSelector((state: CombinedState) => state.user)
     const userDetailInfo: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
@@ -127,7 +124,7 @@ const Home = (props: Props) => {
                                                 variant={"extended"}
                                                 onClick={() => {
                                                 dispatch(questionLevelReducer.actions.setQuesionLevel("入門問題"))
-                                                props.loadEasyQuestion()
+                                                dispatch(loadEasyQuizSliceReducer.actions.loadEasyQuiz(""))
                                                 dispatch(modalReducer.actions.open("questionStartModal"))
                                             }}>
                                                 入門問題
@@ -146,7 +143,7 @@ const Home = (props: Props) => {
                                                 variant={"extended"}
                                                 onClick={() => {
                                                 dispatch(questionLevelReducer.actions.setQuesionLevel("中級問題"))
-                                                props.loadIntermediateQuestion()
+                                                dispatch(loadIntermediateQuizSliceReducer.actions.loadIntermediateQuiz(""))
                                                 dispatch(modalReducer.actions.open("questionStartModal"))
                                             }}>
                                                 中級問題
@@ -207,22 +204,6 @@ const Home = (props: Props) => {
                 </Grid>
             </Grid>
         </div>
-
-
-
 )}
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => ({
-
-    loadEasyQuestion: () => {dispatch(SetQuestionActionCreator.loadEasyQuestion())},
-
-    loadIntermediateQuestion: () => {dispatch(SetQuestionActionCreator.loadIntermediateQuestion())},
-
-    loadUser: () => {dispatch(SetUserActionCreator.loadUser())},
-})
-
-
-export default connect(
-    null,
-    mapDispatchToProps,
-)(Home)
+export default Home

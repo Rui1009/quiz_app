@@ -1,33 +1,29 @@
-import { reducerWithInitialState } from "typescript-fsa-reducers";
-import actionCreatorFactory, { Action } from "typescript-fsa"
 import {EasyQuizType} from "../Types/type";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
-import axios from "axios"
 import {Api} from "../Api/Api";
 import {createSlice} from "@reduxjs/toolkit";
 
-
-const actionTypes = {
-    LOAD_EASY_QUESTION: "LOAD_EASY_QUESTION",
-    LOAD_INTERMEDIATE_QUESTION: "LOAD_INTERMEDIATE_QUESTION",
-    //SET_QUESTION: "SET_QUESTION"
-}
-
-const actionCreator = actionCreatorFactory();
-
-export const SetQuestionActionCreator = {
-    //setQuestion: actionCreator<EasyQuizType[]>(actionTypes.SET_QUESTION),
-    loadEasyQuestion: actionCreator<void>(actionTypes.LOAD_EASY_QUESTION),
-    loadIntermediateQuestion: actionCreator<void>(actionTypes.LOAD_INTERMEDIATE_QUESTION)
-}
-
 const initialState: EasyQuizType[] = []
 
-// export const questionReducer = reducerWithInitialState(initialState)
-//     .case<EasyQuizType[]>(SetQuestionActionCreator.setQuestion, (state: EasyQuizType[], payload: EasyQuizType[]) =>
-//         payload
-//     )
-//
+export const loadEasyQuizSliceReducer = createSlice({
+    name: "loadEasyQuiz",
+    initialState: "",
+    reducers: {
+        loadEasyQuiz(state: string, action: {payload: string}) {
+            return state
+        }
+    }
+})
+
+export const loadIntermediateQuizSliceReducer = createSlice({
+    name: "loadEasyQuiz",
+    initialState: "",
+    reducers: {
+        loadIntermediateQuiz(state: string, action: {payload: string}) {
+            return state
+        }
+    }
+})
 
 export const questionSliceReducer = createSlice({
     name: "setQuestion",
@@ -42,7 +38,8 @@ export const questionSliceReducer = createSlice({
 
 function* fetchEasyQuestions() {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/api/easyQuiz"))["data"];
+        const result = (yield call(Api.get, "http://localhost:9001/easyQuiz"))["data"];
+        console.log(result)
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]
@@ -58,7 +55,7 @@ function* fetchEasyQuestions() {
 
 function* fetchInterMediateQuestion() {
     try {
-        const result = (yield call(Api.get, "http://localhost:3000/api/intermediateQuiz"))["data"];
+        const result = (yield call(Api.get, "http://localhost:9001/intermediateQuiz"))["data"];
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]
@@ -73,6 +70,6 @@ function* fetchInterMediateQuestion() {
 }
 
 export const questoinSaga = [
-    takeLatest(actionTypes.LOAD_EASY_QUESTION, fetchEasyQuestions),
-    takeLatest(actionTypes.LOAD_INTERMEDIATE_QUESTION, fetchInterMediateQuestion)
+    takeLatest(loadEasyQuizSliceReducer.actions.loadEasyQuiz, fetchEasyQuestions),
+    takeLatest(loadIntermediateQuizSliceReducer.actions.loadIntermediateQuiz, fetchInterMediateQuestion)
 ];
