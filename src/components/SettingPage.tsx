@@ -31,7 +31,7 @@ export const SettingPageRenderField = (
 const SettingPage = () => {
     const playingUser = useSelector((state: CombinedState) => state.playingUser)
     const currentValue = useSelector((state: CombinedState) => getFormValues("settingForm")(state) as {username: string, password: string, icon: string})
-    const data: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
+    const data: any = useSelector((state: CombinedState) => state.userDetailInfo)
     const userNameData = data.map((elem: PersonalInfoType) => {
         return elem.username
     })

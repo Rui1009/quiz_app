@@ -22,10 +22,13 @@ export interface IntermediateQuizType {
 export interface PersonalInfoType {
     username: string,
     password: string,
-    icon?: string,
-    lank?: number,
+    icon: string,
     point: number
-    achievementRate?: number,
     strongField?: string,
     weakField?: string
+}
+
+export interface RankingType {
+    username: string,
+    point: number
 }

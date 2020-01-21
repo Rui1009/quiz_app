@@ -19,7 +19,7 @@ export interface CombinedState {
     result: string[],
     login: loginType,
     user: string,
-    userDetailInfo: PersonalInfoType[],
+    userDetailInfo: PersonalInfoType,
     playingUser: PersonalInfoType,
     loadUser: string,
     loadEasyQuiz: string,

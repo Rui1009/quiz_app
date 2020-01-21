@@ -61,7 +61,7 @@ const useStyles = makeStyles({
 
 const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
     const currentValue = useSelector((state: CombinedState) => getFormValues("registrationForm")(state) as LoginInfoType)
-    const data: PersonalInfoType[] = useSelector((state: CombinedState) => state.userDetailInfo)
+    const data: any = useSelector((state: CombinedState) => state.userDetailInfo)
     const userNameData = data.map((elem: PersonalInfoType) => {
         return elem.username
     })
