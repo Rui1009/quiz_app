@@ -1,7 +1,7 @@
 import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
-import {LoginInfoType, PersonalInfoType} from "../Types/type";
+import {LoginInfoType, RankingType} from "../Types/type";
 import {useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
@@ -61,8 +61,8 @@ const useStyles = makeStyles({
 
 const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
     const currentValue = useSelector((state: CombinedState) => getFormValues("registrationForm")(state) as LoginInfoType)
-    const data: any = useSelector((state: CombinedState) => state.userDetailInfo)
-    const userNameData = data.map((elem: PersonalInfoType) => {
+    const allUsers: RankingType[] = useSelector((state: CombinedState) => state.ranking)
+    const userNameData = allUsers.map((elem: RankingType) => {
         return elem.username
     })
     const userNameErrorMessage = currentValue && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";

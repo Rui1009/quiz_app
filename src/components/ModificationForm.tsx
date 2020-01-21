@@ -5,20 +5,21 @@ import Button from "@material-ui/core/Button";
 import {SettingPageRenderField} from "./SettingPage";
 import {useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
-import {PersonalInfoType} from "../Types/type";
+import {PersonalInfoType, RankingType} from "../Types/type";
 import {Grid} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const ModificationForm = (props: InjectedFormProps) => {
-    const playingUser = useSelector((state: CombinedState) => state.playingUser)
-    const currentValue = useSelector((state: CombinedState) => getFormValues("settingForm")(state) as {username: string, password: string, icon: string})
-    const data: any = useSelector((state: CombinedState) => state.userDetailInfo)
-    const userNameData = data.map((elem: PersonalInfoType) => {
+    const currentValue = useSelector((state: CombinedState) => getFormValues("ModificationForm")(state) as {username: string, password: string, icon: string})
+    const userDetailInfo: PersonalInfoType = useSelector((state: CombinedState) => state.userDetailInfo)
+    const allUsers: RankingType[] = useSelector((state: CombinedState) => state.ranking)
+    const userNameData = allUsers.map((elem: RankingType) => {
         return elem.username
     })
-    const userNameErrorMessage = currentValue && currentValue.username !== playingUser.username && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
-
+    const userNameErrorMessage = currentValue && currentValue.username !== userDetailInfo.username && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
     return (
         <form onSubmit={props.handleSubmit}>
+            <Typography color={"error"}>{userNameErrorMessage}</Typography>
             <Grid container xs={12}>
                 <Grid item xs={12} style={{marginBottom: 30, marginTop: 50}}>
                     <Field
