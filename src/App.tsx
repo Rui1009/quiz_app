@@ -1,30 +1,23 @@
 import React, {useEffect} from 'react';
-import {connect, Provider, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import './App.css';
 import NewRegistration from "./components/NewRegistration";
-import {buildStore, sagaMiddleware} from "./store";
-import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import LogIn from "./components/LogIn";
 import Home from "./components/Home";
 import Quiz from "./components/Quiz";
 import AnswerResult from "./components/AnswerResult";
 import Auth from "./components/Auth/Auth";
 import Header from "./components/Header";
-import {CombinedState} from "./modules/RootModule";
-import {loadUserSliceReducer} from "./modules/User";
+import {loadRankingSliceReducer} from "./modules/User";
 import SettingPage from "./components/SettingPage";
 
-interface Props {
-    user: string
-    loadUser(): void
-}
 
-
-const App = (props: Props) => {
+const App = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadUserSliceReducer.actions.loadUser({param: "るい"}))
-    }, [props.user]);
+        dispatch(loadRankingSliceReducer.actions.loadRanking(""))
+    });
   return (
 
             <BrowserRouter>
@@ -48,11 +41,4 @@ const App = (props: Props) => {
   );
 }
 
-const mapStateToProps = (state: CombinedState) => ({
-    user: state.user
-})
-
-export default connect(
-    mapStateToProps,
-    null
-)(App);
+export default App;

@@ -4,9 +4,15 @@ import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
 import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./Answer";
 import {loadEasyQuizSliceReducer, loadIntermediateQuizSliceReducer, questionSliceReducer} from "./Question";
-import {EasyQuizType, PersonalInfoType} from "../Types/type";
+import {EasyQuizType, PersonalInfoType, RankingType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
-import {loadUserSliceReducer, playingUserSliceReducer, userDetailSliceReducer, userSliceReducer} from "./User";
+import {
+    loadUserSliceReducer,
+    playingUserSliceReducer,
+    setRankingSliceReducer,
+    userDetailSliceReducer,
+    userSliceReducer
+} from "./User";
 
 
 export interface CombinedState {
@@ -23,7 +29,8 @@ export interface CombinedState {
     playingUser: PersonalInfoType,
     loadUser: string,
     loadEasyQuiz: string,
-    loadIntermediateQuiz: string
+    loadIntermediateQuiz: string,
+    ranking: RankingType[]
 }
 
 
@@ -50,5 +57,6 @@ export const rootReducer = combineReducers<CombinedState>({
     playingUser: playingUserSliceReducer.reducer,
     loadUser: loadUserSliceReducer.reducer,
     loadEasyQuiz: loadEasyQuizSliceReducer.reducer,
-    loadIntermediateQuiz: loadIntermediateQuizSliceReducer.reducer
+    loadIntermediateQuiz: loadIntermediateQuizSliceReducer.reducer,
+    ranking: setRankingSliceReducer.reducer
 })
