@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {CombinedState} from "../modules/RootModule";
 import _ from "lodash"
 import {useDispatch, useSelector} from "react-redux";
@@ -11,12 +11,27 @@ import Typography from "@material-ui/core/Typography";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
+import {postResultSliceReducer} from "../modules/Answer";
+import {PersonalInfoType} from "../Types/type";
 
 
 const AnswerResult = () => {
+    useEffect(() => {
+        dispatch(postResultSliceReducer.actions.postResult(
+        _.range(10).map((num: number) => ({
+            question: question[num].question,
+            username: user.username,
+            result: result[num],
+            field: question[num].field,
+            level: level === "入門問題" ? "easy" : "intermediate"
+        }))
+    ))}, [])
+    const dispatch = useDispatch()
+    const user: PersonalInfoType = useSelector((state: CombinedState) => state.userDetailInfo)
     const result = useSelector((state: CombinedState) => state.result)
     const answer = useSelector((state: CombinedState) => state.answer)
     const question = useSelector((state: CombinedState) => state.question)
+    const level: string = useSelector((state: CombinedState) => state.questionLevel)
 
     let collectNum = 0;
     for(let i = 0; i < 10; i++) {

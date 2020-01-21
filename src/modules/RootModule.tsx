@@ -27,11 +27,7 @@ export interface CombinedState {
     user: string,
     userDetailInfo: PersonalInfoType,
     playingUser: PersonalInfoType,
-    loadUser: string,
-    loadEasyQuiz: string,
-    loadIntermediateQuiz: string,
     ranking: RankingType[],
-    postResult: string,
 }
 
 
@@ -56,9 +52,5 @@ export const rootReducer = combineReducers<CombinedState>({
     user: userSliceReducer.reducer,
     userDetailInfo: userDetailSliceReducer.reducer,
     playingUser: playingUserSliceReducer.reducer,
-    loadUser: loadUserSliceReducer.reducer,
-    loadEasyQuiz: loadEasyQuizSliceReducer.reducer,
-    loadIntermediateQuiz: loadIntermediateQuizSliceReducer.reducer,
     ranking: setRankingSliceReducer.reducer,
-    postResult: postResultSliceReducer.reducer
 })

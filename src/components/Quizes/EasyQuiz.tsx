@@ -64,15 +64,6 @@ const EasyQuiz = () => {
                                                 onClick={() => {
                                                     dispatch(resultSliceReducer.actions.setResult(question[quizNum].answer === answer[quizNum] ? "O" : "X"))
                                                     dispatch(answerGrowSliceReducer.actions.setGrowOpen(false))
-                                                    dispatch(postResultSliceReducer.actions.postResult(
-                                                        _.range(10).map((num: number) => ({
-                                                            question: question[num].question,
-                                                            username: user.username,
-                                                            result: result[num],
-                                                            field: question[num].field,
-                                                            level: "easy"
-                                                        }))
-                                                    ))
                                                 }}>解答結果を確認する
                                         </Button>
                                     </Link>
