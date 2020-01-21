@@ -32,3 +32,11 @@ export interface RankingType {
     username: string,
     point: number
 }
+
+export interface AnswerResultType {
+    question: string,
+    username: string,
+    result: string,
+    field: string,
+    level: string
+}

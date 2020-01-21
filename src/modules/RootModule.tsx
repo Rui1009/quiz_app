@@ -2,7 +2,7 @@ import { reducer as formReducer } from "redux-form";
 import QuestionLevelReducer from "./QuestionLevel";
 import { combineReducers } from "redux"
 import modalReducer, {modalType} from "./Modal";
-import {answerGrowSliceReducer, answerSliceReducer, resultSliceReducer} from "./Answer";
+import {answerGrowSliceReducer, answerSliceReducer, postResultSliceReducer, resultSliceReducer} from "./Answer";
 import {loadEasyQuizSliceReducer, loadIntermediateQuizSliceReducer, questionSliceReducer} from "./Question";
 import {EasyQuizType, PersonalInfoType, RankingType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
@@ -30,7 +30,8 @@ export interface CombinedState {
     loadUser: string,
     loadEasyQuiz: string,
     loadIntermediateQuiz: string,
-    ranking: RankingType[]
+    ranking: RankingType[],
+    postResult: string,
 }
 
 
@@ -58,5 +59,6 @@ export const rootReducer = combineReducers<CombinedState>({
     loadUser: loadUserSliceReducer.reducer,
     loadEasyQuiz: loadEasyQuizSliceReducer.reducer,
     loadIntermediateQuiz: loadIntermediateQuizSliceReducer.reducer,
-    ranking: setRankingSliceReducer.reducer
+    ranking: setRankingSliceReducer.reducer,
+    postResult: postResultSliceReducer.reducer
 })

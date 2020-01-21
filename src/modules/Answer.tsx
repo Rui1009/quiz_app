@@ -1,22 +1,9 @@
-import * as React from "react"
-import {reducerWithInitialState} from "typescript-fsa-reducers";
-import actionCreatorFactory from "typescript-fsa";
-import {string} from "prop-types";
+import * as React from "react";
 import {createSlice} from "@reduxjs/toolkit";
-
-// export const actionTypes = {
-//     SET_GROW_OPEN: "SET_GROW_OPEN",
-//     SET_ANSWER: "SET_ANSWER",
-//     SET_RESULT: "SET_RESULT"
-// }
-// //
-// const actionCreator = actionCreatorFactory();
-//
-//
-// export const SetAnserActionCreator = {
-//     setAnswer: actionCreator<string>(actionTypes.SET_ANSWER),
-//     setResult: actionCreator<string>(actionTypes.SET_RESULT)
-// }
+import {AnswerResultType} from "../Types/type";
+import {AxiosResponse} from "axios";
+import {call, takeLatest, put} from "@redux-saga/core/effects"
+import {Api} from "../Api/Api";
 
 const initialGrowState: boolean = false
 
@@ -61,3 +48,26 @@ export const resultSliceReducer = createSlice({
         }
     }
 })
+
+export const postResultSliceReducer = createSlice({
+    name: "postResult",
+    initialState: "",
+    reducers: {
+        postResult(state: string, action: {payload: AnswerResultType[]}) {
+            return state
+        }
+    }
+})
+
+function* postAnswerResult(action: {type: string, payload: AnswerResultType[]}) {
+    try {
+        const result: AxiosResponse<any> = (yield call(Api.answerPost, "http://localhost9001/answerResult", action.payload))
+        console.log(result)
+    } catch (e) {
+        console.log("post error")
+    }
+}
+
+export const answerResultSaga = [takeLatest(postResultSliceReducer.actions.postResult, postAnswerResult)]
+
+
