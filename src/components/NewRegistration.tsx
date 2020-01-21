@@ -92,7 +92,7 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
                                 label={"パスワード"}
                                 name="password"
                                 component={renderField}
-                                type={"string"}
+                                type={"password"}
                                 validate={[passLengthValidation, requiredValidation]}
                             />
                             </Grid>

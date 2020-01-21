@@ -36,7 +36,7 @@ const ModificationForm = (props: InjectedFormProps) => {
                         label={"パスワード"}
                         name="password"
                         component={SettingPageRenderField}
-                        type={"text"}
+                        type={"password"}
                         validate={[requiredValidation, passLengthValidation]}
                     />
                 </Grid>
