@@ -2,7 +2,7 @@ import React from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType, RankingType} from "../Types/type";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import Button from "@material-ui/core/Button";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import {Link} from "react-router-dom";
 import logo from "../genkan_logo.svg"
 import Box from "@material-ui/core/Box";
+import {postNewUserSliceReducer} from "../modules/User";
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -60,6 +61,7 @@ const useStyles = makeStyles({
 });
 
 const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
+    const dispatch = useDispatch()
     const currentValue = useSelector((state: CombinedState) => getFormValues("registrationForm")(state) as LoginInfoType)
     const allUsers: RankingType[] = useSelector((state: CombinedState) => state.ranking)
     const userNameData = allUsers.map((elem: RankingType) => {
@@ -97,8 +99,14 @@ const NewRegistration = (props: InjectedFormProps<LoginInfoType>) => {
                             />
                             </Grid>
                         </Grid>
-                        <Link to={"/home"} style={{textDecoration: "none"}}>
-                            <Button disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0} color={"primary"} type={"submit"} variant={"contained"}>新規登録</Button>
+                        <Link to={"/"} style={{textDecoration: "none"}}>
+                            <Button
+                                disabled={props.invalid || props.pristine || userNameErrorMessage.length !== 0}
+                                color={"primary"}
+                                type={"submit"}
+                                variant={"contained"}
+                                onClick={() => dispatch(postNewUserSliceReducer.actions.postNewUser({username: currentValue.username, password: currentValue.password}))}
+                            >新規登録</Button>
                         </Link>
                     </form>
             </CardContent>

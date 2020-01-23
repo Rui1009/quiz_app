@@ -1,10 +1,11 @@
 import React from "react"
 import {InputAdornment, TextField, Typography} from "@material-ui/core";
 import {getFormValues, WrappedFieldProps} from "redux-form";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CombinedState} from "../modules/RootModule";
 import {PersonalInfoType, RankingType} from "../Types/type";
 import ModificationForm from "./ModificationForm";
+import {setModifiedInfoSliceReducer} from "../modules/User";
 
 export const SettingPageRenderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -25,21 +26,17 @@ export const SettingPageRenderField = (
 };
 
 const SettingPage = () => {
-    const currentValue = useSelector((state: CombinedState) => getFormValues("settingForm")(state) as {username: string, password: string, icon: string})
+    const dispatch = useDispatch()
+    const currentValue = useSelector((state: CombinedState) => getFormValues("ModificationForm")(state) as {password: string})
     const userDetailInfo: PersonalInfoType = useSelector((state: CombinedState) => state.userDetailInfo)
-    const allUsers: RankingType[] = useSelector((state: CombinedState) => state.ranking)
-    const userNameData = allUsers.map((elem: RankingType) => {
-        return elem.username
-    })
-    const userNameErrorMessage = currentValue && currentValue.username !== userDetailInfo.username && userNameData.indexOf(currentValue.username) >= 0 ?  "そのユーザー名はすでに使用されています。" : "";
     return(
         <div>
-            <Typography variant={"h5"} style={{textAlign: "center"}}>プロフィール設定</Typography>
-            <Typography color={"error"}>{userNameErrorMessage}</Typography>
+            <Typography variant={"h5"} style={{textAlign: "center"}}>パスワード設定</Typography>
             <ModificationForm initialValues={{
-                username: userDetailInfo.username,
                 password: userDetailInfo.password
-            }}/>
+            }}
+            onSubmit={() => dispatch(setModifiedInfoSliceReducer.actions.setModifiedInfo({currentUser: userDetailInfo.username, password: currentValue.password}))}
+            />
         </div>
     )
 }

@@ -1,43 +1,85 @@
 import React from 'react';
-import actionCreatorFactory from "typescript-fsa";
 import {LoginInfoType} from "../Types/type";
-import {reducerWithInitialState} from "typescript-fsa-reducers";
 import {createSlice} from "@reduxjs/toolkit";
+import {AxiosResponse} from "axios";
+import {call, takeLatest, put, delay} from "@redux-saga/core/effects"
+import {Api} from "../Api/Api";
 
-// const actionTypes = {
-//     SET_LOGIN: "SET_LOGIN"
-// }
-//
-// const actionCreator = actionCreatorFactory();
-//
-// export const LoginActionCreator = {
-//     setLogin: actionCreator<LoginInfoType>(actionTypes.SET_LOGIN)
-// }
+
+
+
 export interface loginType {
     loginStatus: boolean,
     errorMessage: string
 }
 
 const initialState: loginType = {
-    loginStatus: false,
+    loginStatus: true,
     errorMessage: ""
 }
 
-// export const loginReducer = reducerWithInitialState(initialState)
-//     .case(LoginActionCreator.setLogin, (state: loginType, payload: LoginInfoType) =>
-//         payload.username === "るい" && payload.password === "るいるい" ? {loginStatus: true, errorMessage: ""} : {loginStatus: false, errorMessage: "ユーザー名かパスワードが違います。"}
-//     )
 
 const loginSlice = createSlice({
     name: "setLogin",
     initialState: initialState,
     reducers: {
-        setLogin(state: loginType, action: {payload: LoginInfoType}) {
+        setLogin(state: loginType, action: {payload: boolean}) {
             return(
-            action.payload.username === "るい"　&& action.payload.password === "るいるい" ?
+            action.payload ?
                 {loginStatus: true, errorMessage: ""} : {loginStatus: false, errorMessage: "ユーザー名かパスワードが違います。"}
             )}
     }
 })
+
+export const getLogoutSliceReducer = createSlice({
+    name: "getLogout",
+    initialState: "",
+    reducers: {
+        getLogout(state: string, action: {payload: string}) {
+            return state
+        }
+    }
+})
+
+export const postLoginSliceReducer = createSlice({
+    name: "postLogin",
+    initialState: "",
+    reducers: {
+        postLogin(state: string, action: {payload: LoginInfoType}) {
+            return state
+        }
+    }
+})
+
+function* getLogout() {
+    try {
+        const result = yield call(Api.get, "http://localhost:9001/login/logout")
+        console.log(result)
+    } catch (e) {
+        console.log("logout error")
+        console.log(e)
+    }
+}
+
+function* postLoginInfo(action: {type: string, payload: LoginInfoType}) {
+    try {
+        const result: AxiosResponse<any> = (yield call(Api.loginPost, "http://localhost:9001/login", action.payload))
+        console.log(result)
+        if (result.status < 400) {
+            yield put(loginSlice.actions.setLogin(true))
+        } else {
+            yield put(loginSlice.actions.setLogin(false))
+        }
+    } catch (e) {
+        console.log("login post error")
+        yield put(loginSlice.actions.setLogin(false))
+        console.log(e)
+    }
+}
+
+export const loginSaga = [
+    takeLatest(postLoginSliceReducer.actions.postLogin, postLoginInfo),
+    takeLatest(getLogoutSliceReducer.actions.getLogout, getLogout)
+]
 
 export default loginSlice

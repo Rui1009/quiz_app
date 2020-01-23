@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
 import {LoginInfoType} from "../Types/type";
@@ -11,10 +11,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import {Link} from "react-router-dom";
-import loginSlice, {loginType} from "../modules/LogIn";
+import loginSlice, {loginType, postLoginSliceReducer} from "../modules/LogIn";
 import {userSliceReducer} from "../modules/User";
 import logo from "../genkan_logo.svg"
 import Box from "@material-ui/core/Box";
+
 
 export const renderField = (
     props: WrappedFieldProps & {  label?: string; type?: string; unit: string }
@@ -61,11 +62,16 @@ const useStyles = makeStyles({
     }
 });
 
+
 const LogIn = (props: InjectedFormProps<LoginInfoType>) => {
+    useEffect(() => {
+        dispatch(loginSlice.actions.setLogin(true))
+    }, [])
     const classes = useStyles();
     const dispatch = useDispatch()
     const currentValue = useSelector((state: CombinedState) => getFormValues("logInForm")(state) as LoginInfoType)
     const login = useSelector((state: CombinedState) => state.login)
+
     return (
         <Card className={classes.card}>
             <CardContent className={classes.content}>
@@ -96,14 +102,14 @@ const LogIn = (props: InjectedFormProps<LoginInfoType>) => {
                             />
                         </Grid>
                     </Grid>
-                    <Link to={"/home"} style={{textDecoration: "none"}}>
+                    <Link to={"/home"} style={{textDecoration: "none"}} >
                     <Button
                         disabled={props.invalid || props.pristine}
                         color={"primary"}
                         type={"submit"}
                         variant={"contained"}
                         onClick={() => {
-                            dispatch(loginSlice.actions.setLogin(currentValue))
+                            dispatch(postLoginSliceReducer.actions.postLogin({username: currentValue.username, password: currentValue.password}))
                             dispatch(userSliceReducer.actions.setUser(currentValue.username))
                         }}
                     >ログイン</Button>

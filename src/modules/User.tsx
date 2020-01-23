@@ -1,8 +1,9 @@
 import React from "react"
-import {PersonalInfoType, RankingType} from "../Types/type";
+import {LoginInfoType, modificatonInfoType, PersonalInfoType, RankingType} from "../Types/type";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
 import {createSlice} from "@reduxjs/toolkit";
+import {AxiosResponse} from "axios";
 
 
 export const loadUserSliceReducer = createSlice({
@@ -42,19 +43,29 @@ export const userDetailSliceReducer = createSlice({
     }
 })
 //多分もういらない
-const initialPlayingUserState: PersonalInfoType = {
-    username: "",
-    password: "",
-    icon: "",
-    point: 0
-}
+// const initialPlayingUserState: PersonalInfoType = {
+//     username: "",
+//     password: "",
+//     icon: "",
+//     point: 0
+// }
+//
+// export const playingUserSliceReducer = createSlice({
+//     name: "playinguser",
+//     initialState: initialPlayingUserState,
+//     reducers: {
+//         setPlayingUser(state: PersonalInfoType, action: {payload: PersonalInfoType}) {
+//             return action.payload
+//         }
+//     }
+// })
 
-export const playingUserSliceReducer = createSlice({
-    name: "playinguser",
-    initialState: initialPlayingUserState,
+export const postNewUserSliceReducer = createSlice({
+    name: "postNewUser",
+    initialState: "",
     reducers: {
-        setPlayingUser(state: PersonalInfoType, action: {payload: PersonalInfoType}) {
-            return action.payload
+        postNewUser(state: string, action: {payload: LoginInfoType}) {
+            return state
         }
     }
 })
@@ -81,6 +92,16 @@ export const setRankingSliceReducer = createSlice({
     }
 })
 
+export const setModifiedInfoSliceReducer = createSlice({
+    name: "setModifiedInfo",
+    initialState: "",
+    reducers: {
+        setModifiedInfo(state: string, action: {payload: modificatonInfoType}) {
+            return state
+        }
+    }
+})
+
 function* fetchUserInfo(action: {type: string, payload: {param: string}}) {
     try {
         const result = (yield call(Api.get, `http://localhost:9001/profile/?user=${action.payload.param}`))["data"]
@@ -103,7 +124,29 @@ function* fetchRanking() {
     }
 }
 
+function* postNewUserInfo(action: {type: string, payload: LoginInfoType}) {
+    try {
+        const result: AxiosResponse<any> = (yield call(Api.loginPost, "http://localhost:9001/newRegistration", action.payload))
+        console.log(result)
+    } catch (e) {
+        console.log("registration error")
+        console.log(e)
+    }
+}
+
+function* postModifiedUserInfo(action: {type: string, payload: modificatonInfoType}) {
+    try {
+        const result: AxiosResponse<any> = (yield call(Api.modificationPost, "http://localhost:9001/modificationUserInfo", action.payload))
+        console.log(result)
+    } catch (e) {
+        console.log("modification error")
+        console.log(e)
+    }
+}
+
 export const userSaga = [
     takeLatest(loadUserSliceReducer.actions.loadUser, fetchUserInfo),
-    takeLatest(loadRankingSliceReducer.actions.loadRanking, fetchRanking)
+    takeLatest(loadRankingSliceReducer.actions.loadRanking, fetchRanking),
+    takeLatest(postNewUserSliceReducer.actions.postNewUser, postNewUserInfo),
+    takeLatest(setModifiedInfoSliceReducer.actions.setModifiedInfo, postModifiedUserInfo)
     ]

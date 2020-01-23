@@ -40,3 +40,8 @@ export interface AnswerResultType {
     field: string,
     level: string
 }
+
+export interface modificatonInfoType {
+    currentUser: string,
+    password: string
+}

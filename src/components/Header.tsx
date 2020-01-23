@@ -8,11 +8,15 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grid from "@material-ui/core/Grid";
 import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import {useDispatch} from "react-redux";
+import loginSlice, {getLogoutSliceReducer} from "../modules/LogIn";
 
 
 
 
 const Header = () => {
+    const dispatch = useDispatch()
     return(
         <AppBar position={"static"} color={"default"}>
             <Toolbar style={{display: "flex"}}>
@@ -24,12 +28,24 @@ const Header = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item container xs={2} justify={"flex-end"}>
-                    <Link to={"/setting_page"} style={{textDecoration: "none"}}>
-                        <IconButton color={"inherit"}>
-                            <AccountCircle />
-                        </IconButton>
-                    </Link>
+                <Grid item container xs={4} justify={"flex-end"}>
+                    <Grid container xs={12}>
+                        <Grid item xs={6}>
+                            <Link to={"/setting_page"} style={{textDecoration: "none"}}>
+                                <IconButton color={"inherit"}>
+                                    <AccountCircle />
+                                </IconButton>
+                            </Link>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Link to={"/"} style={{textDecoration: "none"}}>
+                                <Button onClick={() => {
+                                    dispatch(loginSlice.actions.setLogin(false))
+                                    dispatch(getLogoutSliceReducer.actions.getLogout(""))
+                                }}>ログアウト</Button>
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Toolbar>
         </AppBar>

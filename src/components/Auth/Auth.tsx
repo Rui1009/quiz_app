@@ -2,11 +2,10 @@ import React, {ReactNode} from 'react';
 import { Redirect } from 'react-router-dom';
 import {CombinedState} from "../../modules/RootModule";
 import {useSelector} from "react-redux";
-import LogIn from "../LogIn";
 import {loginType} from "../../modules/LogIn";
 
 interface Props {
-    children?: ReactNode
+    children: any
 }
 
 const Auth = (props: Props) => {

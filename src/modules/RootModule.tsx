@@ -8,7 +8,6 @@ import {EasyQuizType, PersonalInfoType, RankingType} from "../Types/type";
 import loginReducer, {loginType} from "./LogIn";
 import {
     loadUserSliceReducer,
-    playingUserSliceReducer,
     setRankingSliceReducer,
     userDetailSliceReducer,
     userSliceReducer
@@ -26,7 +25,6 @@ export interface CombinedState {
     login: loginType,
     user: string,
     userDetailInfo: PersonalInfoType,
-    playingUser: PersonalInfoType,
     ranking: RankingType[],
 }
 
@@ -51,6 +49,5 @@ export const rootReducer = combineReducers<CombinedState>({
     login: loginReducer.reducer,
     user: userSliceReducer.reducer,
     userDetailInfo: userDetailSliceReducer.reducer,
-    playingUser: playingUserSliceReducer.reducer,
     ranking: setRankingSliceReducer.reducer,
 })

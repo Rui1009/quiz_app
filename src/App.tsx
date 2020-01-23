@@ -13,11 +13,13 @@ import {loadRankingSliceReducer} from "./modules/User";
 import SettingPage from "./components/SettingPage";
 
 
+
 const App = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(loadRankingSliceReducer.actions.loadRanking(""))
     });
+
   return (
 
             <BrowserRouter>
@@ -25,7 +27,6 @@ const App = () => {
                     <Route exact path="/" component={LogIn} />
                     <Route exact path="/registration" component={NewRegistration} />
                     <Switch>
-                        //@ts-ignore
                         <Auth>
                             <Header />
                             <Route exact path="/home" component={Home} />

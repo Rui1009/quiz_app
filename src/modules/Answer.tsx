@@ -2,7 +2,7 @@ import * as React from "react";
 import {createSlice} from "@reduxjs/toolkit";
 import {AnswerResultType} from "../Types/type";
 import {AxiosResponse} from "axios";
-import {call, takeLatest, put} from "@redux-saga/core/effects"
+import {call, takeLatest} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
 
 const initialGrowState: boolean = false
