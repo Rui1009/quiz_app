@@ -28,7 +28,7 @@ const Header = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item container xs={4} justify={"flex-end"}>
+                <Grid item container xs={3} justify={"flex-end"}>
                     <Grid container xs={12}>
                         <Grid item xs={6}>
                             <Link to={"/setting_page"} style={{textDecoration: "none"}}>
@@ -37,7 +37,7 @@ const Header = () => {
                                 </IconButton>
                             </Link>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{display: "flex", alignItems: "center"}}>
                             <Link to={"/"} style={{textDecoration: "none"}}>
                                 <Button onClick={() => {
                                     dispatch(loginSlice.actions.setLogin(false))

@@ -23,7 +23,8 @@ export interface PersonalInfoType {
     username: string,
     password: string,
     icon: string,
-    point: number
+    point: number,
+    status: string,
     strongField?: string,
     weakField?: string
 }

@@ -54,7 +54,7 @@ const Home = () => {
     return (
 
         <div>
-            <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly"}}>
+            <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly", marginTop: 16}}>
                 <Grid item xs={7}>
                     <Grid container xs={12}>
                     <Card>
@@ -88,8 +88,8 @@ const Home = () => {
                         </Grid>
                         <Grid item xs={6} style={{backgroundColor: "#d9f4fd"}}>
                             <ul>
-                                <Typography>クリアした問題:</Typography>
-                                <Typography variant={"h5"}>???％</Typography>
+                                <Typography>ランク:</Typography>
+                                <Typography variant={"h5"}>{userDetailInfo.status}</Typography>
                                 <hr/>
                                 <Typography>苦手分野:</Typography>
                                 <Typography variant={"h5"}>{userDetailInfo.weakField}</Typography>

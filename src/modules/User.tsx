@@ -31,6 +31,7 @@ const Istate: PersonalInfoType = {
     password: "",
     icon: "",
     point: 0,
+    status: ""
 }
 
 export const userDetailSliceReducer = createSlice({
@@ -42,23 +43,6 @@ export const userDetailSliceReducer = createSlice({
         }
     }
 })
-//多分もういらない
-// const initialPlayingUserState: PersonalInfoType = {
-//     username: "",
-//     password: "",
-//     icon: "",
-//     point: 0
-// }
-//
-// export const playingUserSliceReducer = createSlice({
-//     name: "playinguser",
-//     initialState: initialPlayingUserState,
-//     reducers: {
-//         setPlayingUser(state: PersonalInfoType, action: {payload: PersonalInfoType}) {
-//             return action.payload
-//         }
-//     }
-// })
 
 export const postNewUserSliceReducer = createSlice({
     name: "postNewUser",
