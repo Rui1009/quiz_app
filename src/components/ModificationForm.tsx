@@ -3,18 +3,10 @@ import {Field, getFormValues, InjectedFormProps, reduxForm} from "redux-form";
 import {passLengthValidation, requiredValidation} from "../util/Validation";
 import Button from "@material-ui/core/Button";
 import {SettingPageRenderField} from "./SettingPage";
-import {useSelector} from "react-redux";
-import {CombinedState} from "../modules/RootModule";
-import {PersonalInfoType, RankingType} from "../Types/type";
 import {Grid} from "@material-ui/core";
 import {Link} from "react-router-dom";
 
 const ModificationForm = (props: InjectedFormProps) => {
-    const currentValue = useSelector((state: CombinedState) => getFormValues("ModificationForm")(state) as { username: string, password: string, icon: string })
-    const userDetailInfo: PersonalInfoType = useSelector((state: CombinedState) => state.userDetailInfo)
-    const allUsers: RankingType[] = useSelector((state: CombinedState) => state.ranking)
-
-
     return (
         <form onSubmit={props.handleSubmit}>
             <Grid container xs={12}>

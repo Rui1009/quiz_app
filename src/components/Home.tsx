@@ -171,7 +171,6 @@ const Home = () => {
                 <Grid item xs={4}>
                     <Card>
                     <div>
-
                             <Typography variant={"h5"} style={{color: "white", fontWeight: "bold", padding: 5, backgroundColor: "#00baed"}}>順位</Typography>
                             {
                                 rankingArray.map((user: RankingType) =>
@@ -186,7 +185,6 @@ const Home = () => {
 
                                 )
                             }
-
                     </div>
                     </Card>
                 </Grid>

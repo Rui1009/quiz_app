@@ -2,9 +2,9 @@ import React from 'react';
 import {LoginInfoType} from "../Types/type";
 import {createSlice} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
-import {call, takeLatest, put, delay} from "@redux-saga/core/effects"
+import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
-
+import { push } from 'react-router-redux'
 
 
 
@@ -14,7 +14,7 @@ export interface loginType {
 }
 
 const initialState: loginType = {
-    loginStatus: true,
+    loginStatus: false,
     errorMessage: ""
 }
 
@@ -51,6 +51,7 @@ export const postLoginSliceReducer = createSlice({
     }
 })
 
+
 function* getLogout() {
     try {
         const result = yield call(Api.get, "http://localhost:9001/login/logout")
@@ -67,6 +68,7 @@ function* postLoginInfo(action: {type: string, payload: LoginInfoType}) {
         console.log(result)
         if (result.status < 400) {
             yield put(loginSlice.actions.setLogin(true))
+            yield put(push("/home"))
         } else {
             yield put(loginSlice.actions.setLogin(false))
         }

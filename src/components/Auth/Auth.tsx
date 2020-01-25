@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import {CombinedState} from "../../modules/RootModule";
 import {useSelector} from "react-redux";
@@ -9,7 +9,9 @@ interface Props {
 }
 
 const Auth = (props: Props) => {
+
     const login: loginType = useSelector((state: CombinedState) => state.login)
+    console.log(login)
     return(
         login.loginStatus ? props.children : <Redirect to={"/"}/>
     )
