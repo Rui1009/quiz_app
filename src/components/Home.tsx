@@ -162,9 +162,6 @@ const Home = () => {
                             </Grid>
                         </Card>
                     </Grid>
-
-
-
                         <QuestionStartModal />
                     </Grid>
                 </Grid>

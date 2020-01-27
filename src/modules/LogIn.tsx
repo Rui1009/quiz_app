@@ -5,6 +5,7 @@ import {AxiosResponse} from "axios";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
 import { push } from 'react-router-redux'
+import {object} from "prop-types";
 
 
 
@@ -26,10 +27,14 @@ const loginSlice = createSlice({
         setLogin(state: loginType, action: {payload: boolean}) {
             return(
             action.payload ?
-                {loginStatus: true, errorMessage: ""} : {loginStatus: false, errorMessage: "ユーザー名かパスワードが違います。"}
-            )}
+                {...state, loginStatus: true} : {...state, loginStatus: false}
+            )},
+        setErrorMessage(state: loginType, action: {payload: string}) {
+            return (
+                {...state, errorMessage: action.payload}
+            )
     }
-})
+}})
 
 export const getLogoutSliceReducer = createSlice({
     name: "getLogout",
@@ -75,6 +80,7 @@ function* postLoginInfo(action: {type: string, payload: LoginInfoType}) {
     } catch (e) {
         console.log("login post error")
         yield put(loginSlice.actions.setLogin(false))
+        yield put(loginSlice.actions.setErrorMessage("ユーザー名またはパスワードが違います。"))
         console.log(e)
     }
 }

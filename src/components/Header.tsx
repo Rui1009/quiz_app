@@ -41,6 +41,7 @@ const Header = () => {
                             <Link to={"/"} style={{textDecoration: "none"}}>
                                 <Button onClick={() => {
                                     dispatch(loginSlice.actions.setLogin(false))
+                                    dispatch(loginSlice.actions.setErrorMessage(""))
                                     dispatch(getLogoutSliceReducer.actions.getLogout(""))
                                 }}>ログアウト</Button>
                             </Link>

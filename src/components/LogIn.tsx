@@ -64,8 +64,6 @@ const useStyles = makeStyles({
 
 const LogIn = () => {
     const classes = useStyles();
-    const dispatch = useDispatch()
-    const currentValue = useSelector((state: CombinedState) => getFormValues("logInForm")(state) as LoginInfoType)
 
     return (
         <Card className={classes.card}>
