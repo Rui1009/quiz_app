@@ -27,7 +27,7 @@ const QuestionStartModal = () => {
             onClose={() => dispatch(modalReducer.actions.close("questionStartModal"))}
         >
             <DialogTitle>
-                <Grid container xs={12}>
+                <Grid container xs={12} style={{borderBottom: "solid 0.5px"}}>
                     <Grid item xs={10}>
                         <Typography variant={"h4"}>{questionLevel}</Typography>
                     </Grid>
@@ -39,11 +39,10 @@ const QuestionStartModal = () => {
             <DialogContent>
                     <ul>
                         <li><Typography>問題は全部で10問です。</Typography></li>
-                        <li><Typography variant={"h6"} color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
+                        <li><Typography color={"secondary"}>一度回答した問題に戻ることはできません。</Typography></li>
                     </ul>
-                    <Link to="/quiz" style={{textDecoration: "none"}}>
+                    <Link to="/quiz" style={{textDecoration: "none", display: "flex", justifyContent: "center"}}>
                         <Button
-                            style={{width: "80%"}}
                             color={"primary"}
                             variant={"contained"}
                             onClick={() => {

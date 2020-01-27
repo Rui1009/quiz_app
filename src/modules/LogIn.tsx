@@ -5,8 +5,6 @@ import {AxiosResponse} from "axios";
 import {call, takeLatest, put} from "@redux-saga/core/effects"
 import {Api} from "../Api/Api";
 import { push } from 'react-router-redux'
-import {object} from "prop-types";
-
 
 
 export interface loginType {
