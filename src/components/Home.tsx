@@ -152,9 +152,10 @@ const Home = (props: InjectedFormProps) => {
                                             <Fab
                                                 style={{width: "100%"}}
                                                 variant={"extended"}
+                                                disabled={true}
                                                  onClick={() => dispatch(questionLevelReducer.actions.setQuesionLevel("上級問題"))}
                                             >
-                                                上級問題
+                                                Coming soon...
                                             </Fab>
                                         </Grid>
                                         <Grid item xs={6} style={{display: "flex", alignItems: "center"}}>
