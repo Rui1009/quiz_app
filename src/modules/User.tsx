@@ -88,7 +88,7 @@ export const setModifiedInfoSliceReducer = createSlice({
 
 function* fetchUserInfo(action: {type: string, payload: {param: string}}) {
     try {
-        const result = (yield call(Api.get, `http://localhost:9001/profile/?user=${action.payload.param}`))["data"]
+        const result = (yield call(Api.get, `https://sleepy-hamlet-35316.herokuapp.com/profile/?user=${action.payload.param}`))["data"]
         console.log(result)
         yield put(userDetailSliceReducer.actions.setUserDetail(result))
     } catch (e) {
@@ -99,7 +99,7 @@ function* fetchUserInfo(action: {type: string, payload: {param: string}}) {
 
 function* fetchRanking() {
     try {
-        const result = (yield call(Api.get, "http://localhost:9001/ranking"))["data"]
+        const result = (yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/ranking"))["data"]
         console.log(result)
         yield put(setRankingSliceReducer.actions.setRanking(result))
     } catch (e) {
@@ -110,7 +110,7 @@ function* fetchRanking() {
 
 function* postNewUserInfo(action: {type: string, payload: LoginInfoType}) {
     try {
-        const result: AxiosResponse<any> = (yield call(Api.loginPost, "http://localhost:9001/newRegistration", action.payload))
+        const result: AxiosResponse<any> = (yield call(Api.loginPost, "https://sleepy-hamlet-35316.herokuapp.com/newRegistration", action.payload))
         console.log(result)
     } catch (e) {
         console.log("registration error")
@@ -120,7 +120,7 @@ function* postNewUserInfo(action: {type: string, payload: LoginInfoType}) {
 
 function* postModifiedUserInfo(action: {type: string, payload: modificatonInfoType}) {
     try {
-        const result: AxiosResponse<any> = (yield call(Api.modificationPost, "http://localhost:9001/modificationUserInfo", action.payload))
+        const result: AxiosResponse<any> = (yield call(Api.modificationPost, "https://sleepy-hamlet-35316.herokuapp.com/modificationUserInfo", action.payload))
         console.log(result)
     } catch (e) {
         console.log("modification error")

@@ -38,7 +38,7 @@ export const questionSliceReducer = createSlice({
 
 function* fetchEasyQuestions() {
     try {
-        const result = (yield call(Api.get, "http://localhost:9001/easyQuiz"))["data"];
+        const result = (yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/easyQuiz"))["data"];
         console.log(result)
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
@@ -55,7 +55,7 @@ function* fetchEasyQuestions() {
 
 function* fetchInterMediateQuestion() {
     try {
-        const result = (yield call(Api.get, "http://localhost:9001/intermediateQuiz"))["data"];
+        const result = (yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/intermediateQuiz"))["data"];
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]

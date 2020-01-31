@@ -57,7 +57,7 @@ export const postLoginSliceReducer = createSlice({
 
 function* getLogout() {
     try {
-        const result = yield call(Api.get, "http://localhost:9001/login/logout")
+        const result = yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/login/logout")
         console.log(result)
     } catch (e) {
         console.log("logout error")
@@ -67,7 +67,7 @@ function* getLogout() {
 
 function* postLoginInfo(action: {type: string, payload: LoginInfoType}) {
     try {
-        const result: AxiosResponse<any> = (yield call(Api.loginPost, "http://localhost:9001/login", action.payload))
+        const result: AxiosResponse<any> = (yield call(Api.loginPost, "https://sleepy-hamlet-35316.herokuapp.com/login", action.payload))
         console.log(result)
         if (result.status < 400) {
             yield put(loginSlice.actions.setLogin(true))

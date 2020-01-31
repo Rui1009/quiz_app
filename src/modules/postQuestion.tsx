@@ -22,7 +22,7 @@ export const postQuestionSliceReducer = createSlice({
 
 function* postOriginalQuestion(action: {type: string, payload: postQuizType}) {
     try {
-        const result = (yield call(Api.quizPost, "http://localhost:9001/postQuiz", action.payload))["data"]
+        const result = (yield call(Api.quizPost, "https://sleepy-hamlet-35316.herokuapp.com/postQuiz", action.payload))["data"]
         console.log(result)
     } catch (e) {
         console.log(e)
