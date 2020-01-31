@@ -1,5 +1,5 @@
 import axios from "axios"
-import {AnswerResultType, LoginInfoType, modificatonInfoType} from "../Types/type";
+import {AnswerResultType, LoginInfoType, modificatonInfoType, postQuizType} from "../Types/type";
 
 export class Api {
     static async get(url: string) {
@@ -24,6 +24,15 @@ export class Api {
         )
     }
     static async modificationPost(url: string, data: modificatonInfoType) {
+        return axios(
+            {
+                method: "POST",
+                url: url,
+                data: data
+            }
+        )
+    }
+    static async quizPost(url: string, data: postQuizType) {
         return axios(
             {
                 method: "POST",

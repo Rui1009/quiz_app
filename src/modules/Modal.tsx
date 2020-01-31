@@ -1,15 +1,14 @@
 import React from "react"
-import {reducerWithInitialState} from "typescript-fsa-reducers";
-import actionCreatorFactory from "typescript-fsa";
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface modalType {
     questionStartModal: boolean
+    postQuizModal: boolean
 }
 
 const modalSlice = createSlice({
     name: "setModal",
-    initialState: {questionStartModal: false},
+    initialState: {questionStartModal: false, postQuizModal: false},
     reducers: {
         open(state: modalType, action: {payload: string}) {
             return({

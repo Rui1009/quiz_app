@@ -46,3 +46,15 @@ export interface modificatonInfoType {
     currentUser: string,
     password: string
 }
+
+export interface postQuizType {
+    level: string,
+    question: string,
+    option1?: string,
+    option2?: string,
+    option3?: string,
+    option4?: string,
+    answer: string,
+    description: string,
+    field: string
+}

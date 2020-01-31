@@ -2,14 +2,11 @@ import React from "react"
 import {DialogContent, DialogTitle, Grid, Grow, Typography, Button} from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import { Close } from "@material-ui/icons"
-import {CombinedState} from "../../modules/RootModule";
-import {Dispatch} from "redux";
-import {Action} from "typescript-fsa";
-import modalReducer, {modalType} from "../../modules/Modal";
-import {connect} from "react-redux";
+import modalReducer from "../../modules/Modal";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {answerSliceReducer, resultSliceReducer} from "../../modules/Answer";
+import {CombinedState} from "../../modules/RootModule";
 
 
 

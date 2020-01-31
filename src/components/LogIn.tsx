@@ -1,18 +1,12 @@
 import React, {useEffect} from 'react';
 import {InjectedFormProps, WrappedFieldProps, Field, reduxForm, getFormValues} from "redux-form"
 import {TextField, InputAdornment, makeStyles} from "@material-ui/core"
-import {LoginInfoType} from "../Types/type";
-import {useDispatch, useSelector} from "react-redux";
-import {CombinedState} from "../modules/RootModule";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {Link, withRouter} from "react-router-dom";
-import loginSlice, {loginType, postLoginSliceReducer} from "../modules/LogIn";
-import {userSliceReducer} from "../modules/User";
 import logo from "../genkan_logo.svg"
 import Box from "@material-ui/core/Box";
-import history from 'history/createBrowserHistory';
 import LoginForm from "./LoginForm";
 
 

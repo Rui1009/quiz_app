@@ -19,6 +19,10 @@ import Card from "@material-ui/core/Card";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
+import PostQuizModal from "./Modals/postQuizModal";
+import modalSlice from "../modules/Modal";
+import {InjectedFormProps} from "redux-form";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 
-const Home = () => {
+const Home = (props: InjectedFormProps) => {
     useEffect(() => {
         dispatch(loadUserSliceReducer.actions.loadUser({param: user}))
         dispatch(loadRankingSliceReducer.actions.loadRanking(""))
@@ -163,26 +167,42 @@ const Home = () => {
                         </Card>
                     </Grid>
                         <QuestionStartModal />
+                        <Grid item xs={8}>
+                            <Card style={{marginTop: 16}}>
+                                <Typography variant={"h5"} style={{backgroundColor: "#00baed", fontWeight: "bold", color: "white", padding: 5}}>問題を投稿する</Typography>
+                                <Grid style={{backgroundColor: "#d9f4fd"}}>
+                                    <Typography>問題を作って投稿できます。1問作るごとにpointがもらえます。</Typography>
+                                    <Grid style={{display: "flex",justifyContent: "center", marginTop: 10}}>
+                                        <Button
+                                            style={{width: "40%", backgroundColor: "#00baed", color: "white"}}
+                                            variant={"contained"}
+                                            onClick={() => dispatch(modalSlice.actions.open("postQuizModal"))}
+                                        >問題を作る</Button>
+                                    </Grid>
+                                </Grid>
+                            </Card>
+                        </Grid>
+                        <PostQuizModal {...props}/>
                     </Grid>
                 </Grid>
                 <Grid item xs={4}>
                     <Card>
-                    <div>
-                            <Typography variant={"h5"} style={{color: "white", fontWeight: "bold", padding: 5, backgroundColor: "#00baed"}}>順位</Typography>
-                            {
-                                rankingArray.map((user: RankingType) =>
-                                    <div style={{backgroundColor: "#d9f4fd"}}>
-                                        <List>
-                                            <ListItem style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
-                                                <Typography>{rankingArray.indexOf(user) + 1}位　{user.username}</Typography>
-                                                <Typography>{user.point}Pt</Typography>
-                                            </ListItem>
-                                        </List>
-                                    </div>
+                        <div>
+                        <Typography variant={"h5"} style={{color: "white", fontWeight: "bold", padding: 5, backgroundColor: "#00baed"}}>順位</Typography>
+                        {
+                            rankingArray.map((user: RankingType) =>
+                                <div style={{backgroundColor: "#d9f4fd"}}>
+                                    <List>
+                                        <ListItem style={{display: "flex", justifyContent: "space-between", borderBottom: "1px solid"}}>
+                                            <Typography>{rankingArray.indexOf(user) + 1}位　{user.username}</Typography>
+                                            <Typography>{user.point}Pt</Typography>
+                                        </ListItem>
+                                    </List>
+                                </div>
 
-                                )
-                            }
-                    </div>
+                            )
+                        }
+                        </div>
                     </Card>
                 </Grid>
             </Grid>
