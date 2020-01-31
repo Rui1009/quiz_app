@@ -6,6 +6,7 @@ import {postQuizType} from "../Types/type";
 export const postQuestionSliceReducer = createSlice({
     name: "postQuestion",
     initialState: {
+        username: "",
         level: "",
         question: "",
         answer: "",

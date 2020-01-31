@@ -52,6 +52,7 @@ const PostQuizForm = (props: InjectedFormProps & {
     field: string
 }) => {
     const dispatch = useDispatch()
+    const user = useSelector((state: CombinedState) => state.user)
     const currentValue = useSelector((state: CombinedState) => getFormValues("PostQuizForm")(state) as postQuizType)
     return (
         <form onSubmit={props.handleSubmit}>
@@ -131,6 +132,7 @@ const PostQuizForm = (props: InjectedFormProps & {
                         variant={"contained"}
                         onClick={() => {
                             dispatch(postQuestionSliceReducer.actions.postQuestion({
+                                username: user,
                                 level: props.level,
                                 question: currentValue.question,
                                 option1: currentValue.option1 || undefined,

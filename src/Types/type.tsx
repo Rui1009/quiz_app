@@ -48,6 +48,7 @@ export interface modificatonInfoType {
 }
 
 export interface postQuizType {
+    username: string,
     level: string,
     question: string,
     option1?: string,

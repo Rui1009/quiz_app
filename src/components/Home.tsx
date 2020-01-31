@@ -25,6 +25,7 @@ import modalSlice from "../modules/Modal";
 import {InjectedFormProps} from "redux-form";
 
 
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         avatar: {
@@ -56,9 +57,7 @@ const Home = (props: InjectedFormProps) => {
     const classes = useStyles()
 
     return (
-
-        <div>
-            <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly", marginTop: 16}}>
+            <Grid container xs={12} style={{display: "flex", justifyContent: "space-evenly", paddingTop: 16}}>
                 <Grid item xs={7}>
                     <Grid container xs={12}>
                     <Card>
@@ -102,13 +101,13 @@ const Home = (props: InjectedFormProps) => {
                         </Grid>
                     </Grid>
                     </Card>
-                    <Grid item xs={12} style={{paddingTop: 15}}>
+                    <Grid item xs={12} style={{paddingTop: 10}}>
                         <Card>
                             <Grid container xs={12}>
                                 <Grid item xs={12} style={{backgroundColor: "#00baed"}}>
                                     <Typography variant={"h5"} style={{fontWeight: "bold", color: "white", padding: 5}}>問題にチャレンジ！</Typography>
                                 </Grid>
-                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12}}>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 8}}>
                                     <Grid container xs={12} direction={"row"} justify={"space-around"}>
                                         <Grid item xs={4}>
                                             <Fab
@@ -127,7 +126,7 @@ const Home = (props: InjectedFormProps) => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12}}>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 8}}>
                                     <Grid container xs={12} direction={"row"} justify={"space-around"}>
                                         <Grid item xs={4}>
                                             <Fab
@@ -147,7 +146,7 @@ const Home = (props: InjectedFormProps) => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 12, paddingBottom: 12}}>
+                                <Grid item xs={12} style={{backgroundColor: "#d9f4fd", paddingTop: 8, paddingBottom: 8}}>
                                     <Grid container xs={12} direction={"row"} justify={"space-around"}>
                                         <Grid item xs={4}>
                                             <Fab
@@ -167,12 +166,12 @@ const Home = (props: InjectedFormProps) => {
                         </Card>
                     </Grid>
                         <QuestionStartModal />
-                        <Grid item xs={8}>
-                            <Card style={{marginTop: 16}}>
+                        <Grid item xs={12}>
+                            <Card style={{marginTop: 10}}>
                                 <Typography variant={"h5"} style={{backgroundColor: "#00baed", fontWeight: "bold", color: "white", padding: 5}}>問題を投稿する</Typography>
                                 <Grid style={{backgroundColor: "#d9f4fd"}}>
-                                    <Typography>問題を作って投稿できます。1問作るごとにpointがもらえます。</Typography>
-                                    <Grid style={{display: "flex",justifyContent: "center", marginTop: 10}}>
+                                    <Typography>問題を作って投稿できます。1問作るごとにpointがもらえます。(入門問題: 30pt、中級問題: 20pt)</Typography>
+                                    <Grid style={{display: "flex",justifyContent: "center", marginTop: 8, marginBottom: 8}}>
                                         <Button
                                             style={{width: "40%", backgroundColor: "#00baed", color: "white"}}
                                             variant={"contained"}
@@ -206,7 +205,6 @@ const Home = (props: InjectedFormProps) => {
                     </Card>
                 </Grid>
             </Grid>
-        </div>
 )}
 
 export default Home
