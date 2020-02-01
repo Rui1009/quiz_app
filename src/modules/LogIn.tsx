@@ -58,9 +58,7 @@ export const postLoginSliceReducer = createSlice({
 function* getLogout() {
     try {
         const result = yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/login/logout")
-        console.log(result)
     } catch (e) {
-        console.log("logout error")
         console.log(e)
     }
 }

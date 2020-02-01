@@ -62,7 +62,6 @@ export const postResultSliceReducer = createSlice({
 function* postAnswerResult(action: {type: string, payload: AnswerResultType[]}) {
     try {
         const result: AxiosResponse<any> = (yield call(Api.answerPost, "https://sleepy-hamlet-35316.herokuapp.com/answerResult", action.payload))
-        console.log(result)
     } catch (e) {
         console.log("post error")
     }

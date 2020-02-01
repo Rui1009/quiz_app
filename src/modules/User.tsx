@@ -89,21 +89,18 @@ export const setModifiedInfoSliceReducer = createSlice({
 function* fetchUserInfo(action: {type: string, payload: {param: string}}) {
     try {
         const result = (yield call(Api.get, `https://sleepy-hamlet-35316.herokuapp.com/profile/?user=${action.payload.param}`))["data"]
-        console.log(result)
+
         yield put(userDetailSliceReducer.actions.setUserDetail(result))
     } catch (e) {
-        console.log("fetchUser error");
-        console.log(e)
+        console.log(e);
     }
 }
 
 function* fetchRanking() {
     try {
         const result = (yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/ranking"))["data"]
-        console.log(result)
         yield put(setRankingSliceReducer.actions.setRanking(result))
     } catch (e) {
-        console.log("fetchRanking error");
         console.log(e)
     }
 }
@@ -111,9 +108,7 @@ function* fetchRanking() {
 function* postNewUserInfo(action: {type: string, payload: LoginInfoType}) {
     try {
         const result: AxiosResponse<any> = (yield call(Api.loginPost, "https://sleepy-hamlet-35316.herokuapp.com/newRegistration", action.payload))
-        console.log(result)
     } catch (e) {
-        console.log("registration error")
         console.log(e)
     }
 }
@@ -123,7 +118,6 @@ function* postModifiedUserInfo(action: {type: string, payload: modificatonInfoTy
         const result: AxiosResponse<any> = (yield call(Api.modificationPost, "https://sleepy-hamlet-35316.herokuapp.com/modificationUserInfo", action.payload))
         console.log(result)
     } catch (e) {
-        console.log("modification error")
         console.log(e)
     }
 }

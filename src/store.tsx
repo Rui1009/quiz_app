@@ -4,16 +4,16 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./modules/RootSaga";
 import {configureStore} from "@reduxjs/toolkit";
 import { routerMiddleware } from 'connected-react-router'
-import { createBrowserHistory } from 'history'
+import { createHashHistory } from 'history'
 
 export const sagaMiddleware = createSagaMiddleware();
 
-export const history = createBrowserHistory()
+export const history = createHashHistory()
 
 export const buildStore = (
     configureStore({
         reducer: rootReducer(history),
-        middleware: [sagaMiddleware, reduxLogger, routerMiddleware(history)]
+        middleware: [sagaMiddleware, routerMiddleware(history)]
     })
 )
 

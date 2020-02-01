@@ -39,7 +39,6 @@ export const questionSliceReducer = createSlice({
 function* fetchEasyQuestions() {
     try {
         const result = (yield call(Api.get, "https://sleepy-hamlet-35316.herokuapp.com/easyQuiz"))["data"];
-        console.log(result)
         for(let i = result.length - 1; i >=0; i--) {
             let j = Math.floor(Math.random() * (i + 1))
             let temp = result[i]
@@ -48,7 +47,6 @@ function* fetchEasyQuestions() {
         }
         yield put(questionSliceReducer.actions.setQuestion(result))
     } catch(e) {
-        console.log("fetchQuestion error");
         console.log(e)
     }
 }
@@ -64,7 +62,6 @@ function* fetchInterMediateQuestion() {
         }
         yield put(questionSliceReducer.actions.setQuestion(result))
     } catch(e) {
-        console.log("fetchQuestion error");
         console.log(e)
     }
 }

@@ -78,7 +78,7 @@ const PostQuizModal = (props: InjectedFormProps) => {
                             <MenuItem value={"資本予算"}>資本予算</MenuItem>
                         </Select>
                     </FormControl>
-                    <PostQuizForm level={level} field={field} onSubmit={() => alert("ok")}/>
+                    <PostQuizForm level={level} field={field} onSubmit={() => alert("投稿しました。")}/>
                 </DialogContent>
             </Dialog>
         </Grow>

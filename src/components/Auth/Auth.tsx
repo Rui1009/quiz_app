@@ -11,7 +11,6 @@ interface Props {
 const Auth = (props: Props) => {
 
     const login: loginType = useSelector((state: CombinedState) => state.login)
-    console.log(login)
     return(
         login.loginStatus ? props.children : <Redirect to={"/"}/>
     )
