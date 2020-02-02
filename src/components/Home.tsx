@@ -48,7 +48,7 @@ const Home = (props: InjectedFormProps) => {
     const userDetailInfo: PersonalInfoType = useSelector((state: CombinedState) => state.userDetailInfo)
     const icon = userDetailInfo && userDetailInfo.icon && userDetailInfo.icon.length !== 0 ? userDetailInfo.icon : koskaLogo;
     const rankingArray: RankingType[] = useSelector((state: CombinedState) => state.ranking)
-
+    console.log(rankingArray)
     const rank = rankingArray.findIndex(({username}) => username === userDetailInfo.username) + 1;
 
     const classes = useStyles()

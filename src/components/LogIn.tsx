@@ -70,7 +70,7 @@ const LogIn = () => {
 
                 }}/>
                 <Typography>登録がまだの方は</Typography>
-                <a href="/registration">こちら</a>
+                <Link to={"/registration"}>こちら</Link>
             </CardContent>
         </Card>
     )
